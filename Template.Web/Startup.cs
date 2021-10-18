@@ -1,6 +1,7 @@
 namespace Template.Web
 {
     using System;
+    using System.Data;
     using System.Globalization;
     using System.Text;
     using System.Text.Encodings.Web;
@@ -15,6 +16,7 @@ namespace Template.Web
     using Microsoft.AspNetCore.Http.Features;
     using Microsoft.AspNetCore.ResponseCompression;
     using Microsoft.AspNetCore.Routing;
+    using Microsoft.Data.SqlClient;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
@@ -24,12 +26,15 @@ namespace Template.Web
     using Smart.AspNetCore;
     using Smart.AspNetCore.ApplicationModels;
     using Smart.AspNetCore.Filters;
+    using Smart.Data;
+    using Smart.Data.Accessor.Extensions.DependencyInjection;
+    using Smart.Data.SqlClient;
+
+    using StackExchange.Profiling;
+    using StackExchange.Profiling.Data;
 
     using Template.Web.Authentication;
     using Template.Web.Settings;
-
-    //using StackExchange.Profiling;
-    //using StackExchange.Profiling.Data;
 
     public class Startup
     {
@@ -161,17 +166,20 @@ namespace Template.Web
             // Http
 
             // Database
-            //var connectionString = Configuration.GetConnectionString("Default");
-            // TODO
-            //services.AddSingleton<IDbProvider>(env.IsProduction()
-            //    ? new DelegateDbProvider(() => new SqlConnection(connectionString))
-            //    : new DelegateDbProvider(() => new ProfiledDbConnection(new SqlConnection(connectionString), MiniProfiler.Current)));
+            var connectionString = Configuration.GetConnectionString("Default");
+            services.AddSingleton<IDbProvider>(env.IsProduction()
+                ? new DelegateDbProvider(() => new SqlConnection(connectionString))
+                : new DelegateDbProvider(() => new ProfiledDbConnection(new SqlConnection(connectionString), MiniProfiler.Current)));
 
-            // ReSharper disable once CommentTypo
-            //services.AddSingleton<IDialect>(
-            //    new DelegateDiarect(
-            //        ex => ((PostgresException)ex).SqlState == "23505",
-            //        value => Regex.Replace(value, @"[%_\[]", "[$0]")));
+            services.AddSingleton<IDialect, SqlDialect>();
+
+            services.AddDataAccessor(c =>
+            {
+                c.EngineOption.ConfigureTypeMap(map =>
+                {
+                    map[typeof(DateTime)] = DbType.DateTime2;
+                });
+            });
 
             // Security
             // TODO
