@@ -1,0 +1,475 @@
+﻿/* Background colors */
+.bg-blue,
+.bg-blue-brighter,
+.bg-blue-darker,
+.bg-bluedark,
+.bg-bluedark-brighter,
+.bg-bluedark-darker,
+.bg-teal,
+.bg-teal-brighter,
+.bg-teal-darker,
+.bg-green,
+.bg-green-brighter,
+.bg-green-darker,
+.bg-light-green,
+.bg-light-greenbrighter,
+.bg-light-greendarker,
+.bg-darkgreen,
+.bg-darkgreen-brighter,
+.bg-darkgreen-darker,
+.bg-red,
+.bg-red-brighter,
+.bg-red-darker,
+.bg-reddark,
+.bg-reddark-brighter,
+.bg-reddark-darker,
+/*
+.bg-yellow,
+.bg-yellow-brighter,
+.bg-yellow-darker,
+*/
+.bg-orange,
+.bg-orange-brighter,
+.bg-orange-darker,
+.bg-orangedark,
+.bg-orangedark-brighter,
+.bg-orangedark-darker,
+.bg-magenta,
+.bg-magenta-brighter,
+.bg-magenta-darker,
+.bg-purple,
+.bg-purple-brighter,
+.bg-purple-darker,
+.bg-purplelight,
+.bg-purplelight-brighter,
+.bg-purplelight-darker,
+.bg-purpledark,
+.bg-purpledark-brighter,
+.bg-purpledark-darker,
+.bg-darken,
+.bg-darken-brighter,
+.bg-darken-darker,
+.bg-graydark,
+.bg-graydark-brighter,
+.bg-graydark-darker {
+    color: #f9f9f9 !important;
+}
+
+.bg-blue {
+  background-color: #2d89ef !important;
+}
+.bg-blue-brighter {
+  background-color: #4aa6ff !important;
+}
+.bg-blue-darker {
+  background-color: #0e6ad0 !important;
+}
+
+.bg-bluelight {
+  background-color: #eff4ff !important;
+}
+.bg-bluelight-brighter {
+  background-color: #faffff !important;
+}
+.bg-bluelight-darker {
+  background-color: #d0d5e0 !important;
+}
+
+.bg-bluedark {
+  background-color: #2b5797 !important;
+}
+.bg-bluedark-brighter {
+  background-color: #4874b4 !important;
+}
+.bg-bluedark-darker {
+  background-color: #0c3878 !important;
+}
+
+.bg-teal {
+  background-color: #00aba9 !important;
+}
+.bg-teal-brighter {
+  background-color: #1dc8c6 !important;
+}
+.bg-teal-darker {
+  background-color: #008c8a !important;
+}
+
+.bg-green {
+  background-color: #00a300 !important;
+}
+.bg-green-brighter {
+  background-color: #1dc01d !important;
+}
+.bg-green-darker {
+  background-color: #008400 !important;
+}
+
+.bg-light-green {
+  background-color: #99b433 !important;
+}
+.bg-light-greenbrighter {
+  background-color: #b6d150 !important;
+}
+.bg-light-greendarker {
+  background-color: #7a9514 !important;
+}
+
+.bg-darkgreen {
+  background-color: #1e7145 !important;
+}
+.bg-darkgreen-brighter {
+  background-color: #3b8e62 !important;
+}
+.bg-darkgreen-darker {
+  background-color: #005226 !important;
+}
+
+.bg-red {
+  background-color: #ee1111 !important;
+}
+.bg-red-brighter {
+  background-color: #ff2e2e !important;
+}
+.bg-red-darker {
+  background-color: #cf0000 !important;
+}
+
+.bg-reddark {
+  background-color: #b91d47 !important;
+}
+.bg-reddark-brighter {
+  background-color: #d63a64 !important;
+}
+.bg-reddark-darker {
+  background-color: #9a0028 !important;
+}
+
+.bg-yellow {
+  background-color: #ffc40d !important;
+}
+.bg-yellow-brighter {
+  background-color: #ffe12a !important;
+}
+.bg-yellow-darker {
+  background-color: #e0a500 !important;
+}
+
+.bg-orange {
+  background-color: #e3a21a !important;
+}
+.bg-orange-brighter {
+  background-color: #ffbf37 !important;
+}
+.bg-orange-darker {
+  background-color: #c48300 !important;
+}
+
+.bg-orangedark {
+  background-color: #da532c !important;
+}
+.bg-orangedark-brighter {
+  background-color: #f77049 !important;
+}
+.bg-orangedark-darker {
+  background-color: #bb340d !important;
+}
+
+.bg-magenta {
+  background-color: #ff0097 !important;
+}
+.bg-magenta-brighter {
+  background-color: #ff1db4 !important;
+}
+.bg-magenta-darker {
+  background-color: #e00078 !important;
+}
+
+.bg-purple {
+  background-color: #7e3878 !important;
+}
+.bg-purple-brighter {
+  background-color: #9b5595 !important;
+}
+.bg-purple-darker {
+  background-color: #5f1959 !important;
+}
+
+.bg-purplelight {
+  background-color: #9f00a7 !important;
+}
+.bg-purplelight-brighter {
+  background-color: #bc1dc4 !important;
+}
+.bg-purplelight-darker {
+  background-color: #800088 !important;
+}
+
+.bg-purpledark {
+  background-color: #603cba !important;
+}
+.bg-purpledark-brighter {
+  background-color: #7d59d7 !important;
+}
+.bg-purpledark-darker {
+  background-color: #411d9b !important;
+}
+
+.bg-darken {
+  background-color: #1d1d1d !important;
+}
+.bg-darken-brighter {
+  background-color: #3b3b3b !important;
+}
+.bg-darken-darker {
+  background-color: #000000 !important;
+}
+
+.bg-lighten {
+  background-color: #d5e7ec !important;
+}
+.bg-lighten-brighter {
+  background-color: #f1ffff !important;
+}
+.bg-lighten-darker {
+  background-color: #b6c8cd !important;
+}
+
+.bg-graydark {
+  background-color: #525252 !important;
+}
+.bg-graydark-brighter {
+  background-color: #707070 !important;
+}
+.bg-graydark-darker {
+  background-color: #343434 !important;
+}
+
+/* Text colors */
+.text-blue {
+    color: #2d89ef !important;
+}
+
+.text-blue-brighter {
+    color: #4aa6ff !important;
+}
+
+.text-blue-darker {
+    color: #0e6ad0 !important;
+}
+
+.text-bluelight {
+    color: #eff4ff !important;
+}
+
+.text-bluelight-brighter {
+    color: #faffff !important;
+}
+
+.text-bluelight-darker {
+    color: #d0d5e0 !important;
+}
+
+.text-bluedark {
+    color: #2b5797 !important;
+}
+
+.text-bluedark-brighter {
+    color: #4874b4 !important;
+}
+
+.text-bluedark-darker {
+    color: #0c3878 !important;
+}
+
+.text-teal {
+    color: #00aba9 !important;
+}
+
+.text-teal-brighter {
+    color: #1dc8c6 !important;
+}
+
+.text-teal-darker {
+    color: #008c8a !important;
+}
+
+.text-green {
+    color: #00a300 !important;
+}
+
+.text-green-brighter {
+    color: #1dc01d !important;
+}
+
+.text-green-darker {
+    color: #008400 !important;
+}
+
+.text-light-green {
+    color: #99b433 !important;
+}
+
+.text-light-greenbrighter {
+    color: #b6d150 !important;
+}
+
+.text-light-greendarker {
+    color: #7a9514 !important;
+}
+
+.text-darkgreen {
+    color: #1e7145 !important;
+}
+
+.text-darkgreen-brighter {
+    color: #3b8e62 !important;
+}
+
+.text-darkgreen-darker {
+    color: #005226 !important;
+}
+
+.text-red {
+    color: #ee1111 !important;
+}
+
+.text-red-brighter {
+    color: #ff2e2e !important;
+}
+
+.text-red-darker {
+    color: #cf0000 !important;
+}
+
+.text-reddark {
+    color: #b91d47 !important;
+}
+
+.text-reddark-brighter {
+    color: #d63a64 !important;
+}
+
+.text-reddark-darker {
+    color: #9a0028 !important;
+}
+
+.text-yellow {
+    color: #ffc40d !important;
+}
+
+.text-yellow-brighter {
+    color: #ffe12a !important;
+}
+
+.text-yellow-darker {
+    color: #e0a500 !important;
+}
+
+.text-orange {
+    color: #e3a21a !important;
+}
+
+.text-orange-brighter {
+    color: #ffbf37 !important;
+}
+
+.text-orange-darker {
+    color: #c48300 !important;
+}
+
+.text-orangedark {
+    color: #da532c !important;
+}
+
+.text-orangedark-brighter {
+    color: #f77049 !important;
+}
+
+.text-orangedark-darker {
+    color: #bb340d !important;
+}
+
+.text-magenta {
+    color: #ff0097 !important;
+}
+
+.text-magenta-brighter {
+    color: #ff1db4 !important;
+}
+
+.text-magenta-darker {
+    color: #e00078 !important;
+}
+
+.text-purple {
+    color: #7e3878 !important;
+}
+
+.text-purple-brighter {
+    color: #9b5595 !important;
+}
+
+.text-purple-darker {
+    color: #5f1959 !important;
+}
+
+.text-purplelight {
+    color: #9f00a7 !important;
+}
+
+.text-purplelight-brighter {
+    color: #bc1dc4 !important;
+}
+
+.text-purplelight-darker {
+    color: #800088 !important;
+}
+
+.text-purpledark {
+    color: #603cba !important;
+}
+
+.text-purpledark-brighter {
+    color: #7d59d7 !important;
+}
+
+.text-purpledark-darker {
+    color: #411d9b !important;
+}
+
+.text-darken {
+    color: #1d1d1d !important;
+}
+
+.text-darken-brighter {
+    color: #3b3b3b !important;
+}
+
+.text-darken-darker {
+    color: #000000 !important;
+}
+
+.text-lighten {
+    color: #d5e7ec !important;
+}
+
+.text-lighten-brighter {
+    color: #f1ffff !important;
+}
+
+.text-lighten-darker {
+    color: #b6c8cd !important;
+}
+
+.text-graydark {
+    color: #525252 !important;
+}
+
+.text-graydark-brighter {
+    color: #707070 !important;
+}
+
+.text-graydark-darker {
+    color: #343434 !important;
+}

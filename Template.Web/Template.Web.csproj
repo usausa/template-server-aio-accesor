@@ -29,4 +29,10 @@
     <ProjectReference Include="..\Template.Core\Template.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="ipaexg.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

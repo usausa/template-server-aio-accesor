@@ -1,4 +1,4 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
@@ -29,6 +29,7 @@ a {
 html {
   font-size: 14px;
 }
+
 @media (min-width: 768px) {
   html {
     font-size: 16px;
@@ -38,6 +39,7 @@ html {
 .border-top {
   border-top: 1px solid #e5e5e5;
 }
+
 .border-bottom {
   border-bottom: 1px solid #e5e5e5;
 }
@@ -62,6 +64,7 @@ body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
 }
+
 .footer {
   position: absolute;
   bottom: 0;
@@ -69,3 +72,68 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+/* Loading
+-------------------------------------------------- */
+.lording {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    display: none;
+    align-items: center;
+    background-color: #fff;
+    z-index: 999;
+    opacity: 0.1;
+}
+
+/* Ajax
+-------------------------------------------------- */
+.ajax-error {
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+    background: #ee1111;
+    z-index: 9999;
+}
+
+/* ASP.NET Core
+-------------------------------------------------- */
+.validation-summary-errors {
+    background-color: #fff0f0;
+}
+
+.input-validation-error {
+    background-color: #fff0f0;
+    border-color: #dc3545 !important;
+}
+
+/* Bootstrap
+-------------------------------------------------- */
+.btn-group-xs > .btn, .btn-xs {
+    padding: .25rem .4rem;
+    font-size: .875rem;
+    line-height: .5;
+    border-radius: .2rem;
+}
+
+/* Form
+-------------------------------------------------- */
+.input-validation-error {
+    background-color: #fff0f0;
+    border-color: #dc3545 !important;
+}
+
+.validation-summary-errors > .error-list {
+    margin: 0;
+    list-style-type: none;
+    padding-inline-start: 0;
+}
+
+/* Script
+-------------------------------------------------- */
+/* ReSharper disable DeclarationIsEmpty */
+.confirm-behavior {
+}
+/* ReSharper restore DeclarationIsEmpty */
