@@ -214,6 +214,8 @@ namespace Template.Web
             services.AddSingleton<AccountService>();
             services.AddSingleton<DataService>();
             services.AddSingleton<ItemService>();
+            services.AddSingleton<StorageService>();
+            services.AddSingleton<ConnectorService>();
 
             // Csv
             // TODO
