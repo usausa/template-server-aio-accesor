@@ -34,6 +34,8 @@ namespace Template.Web
     using StackExchange.Profiling.Data;
 
     using Template.Web.Authentication;
+    using Template.Web.Infrastructure.Json;
+    using Template.Web.Infrastructure.Token;
     using Template.Web.Settings;
 
     public class Startup
@@ -74,6 +76,7 @@ namespace Template.Web
             {
                 options.Threshold = serverSetting.LongTimeThreshold;
             });
+            services.AddSingleton(new TokenSetting { Token = serverSetting.ApiToken });
 
             services.Configure<RouteOptions>(options =>
             {
@@ -100,8 +103,7 @@ namespace Template.Web
                 {
                     options.JsonSerializerOptions.IgnoreNullValues = true;
                     options.JsonSerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
-                    // TODO
-                    //options.JsonSerializerOptions.Converters.Add(new DateTimeConverter());
+                    options.JsonSerializerOptions.Converters.Add(new DateTimeConverter());
                 });
 
             // Compress
@@ -121,8 +123,7 @@ namespace Template.Web
                 services.AddSwaggerGen(options =>
                 {
                     options.SwaggerDoc("template", new OpenApiInfo { Title = "Template API", Version = "v1" });
-                    // TODO
-                    //options.OperationFilter<TokenOperationFilter>(serverSetting.ApiToken);
+                    options.OperationFilter<TokenOperationFilter>(serverSetting.ApiToken);
                 });
             }
 
@@ -159,8 +160,9 @@ namespace Template.Web
             services.AddSingleton<IMapper>(new Mapper(new MapperConfiguration(c =>
             {
                 c.AddProfile<Template.Web.Areas.Default.MappingProfile>();
-                // TODO
-                //c.AddProfile<Template.Web.Areas.Api.MappingProfile>();
+                c.AddProfile<Template.Web.Areas.Admin.MappingProfile>();
+                c.AddProfile<Template.Web.Areas.Api.MappingProfile>();
+                c.AddProfile<Template.Web.Areas.Example.MappingProfile>();
             })));
 
             // Http
@@ -197,11 +199,13 @@ namespace Template.Web
 
             // Service
             // TODO
-
-            // Hub
-            // TODO
+            //services.AddSingleton<DataService>();
 
             // Report
+            // TODO
+            //services.AddSingleton<ExampleReportBuilder>();
+
+            // Hub
             // TODO
         }
 
