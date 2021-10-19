@@ -6,7 +6,7 @@ namespace Template.Web.Areas.Admin.Controllers
 
     public class MenuController : BaseAdminController
     {
-        [DefaultRoute]
+        [AreaControllerRoute]
         [HttpGet]
         public IActionResult Index()
         {

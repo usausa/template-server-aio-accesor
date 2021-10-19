@@ -3,7 +3,7 @@ namespace Template.Web.Areas.Api.Models
     using System.ComponentModel.DataAnnotations;
     using System.Diagnostics.CodeAnalysis;
 
-    public class DataUpdateRequestEntry
+    public class ItemUpdateRequestEntry
     {
         [AllowNull]
         public string Code { get; set; }
@@ -15,6 +15,6 @@ namespace Template.Web.Areas.Api.Models
     {
         [Required]
         [AllowNull]
-        public DataUpdateRequestEntry[] Entries { get; set; }
+        public ItemUpdateRequestEntry[] Entries { get; set; }
     }
 }

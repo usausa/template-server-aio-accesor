@@ -330,11 +330,7 @@ ASALocalRun/
 .mfractor/
 
 # Folder customize
-desktop.ini
 Publish/
-coverage.cobertura.xml
-coverage.opencover.xml
-*.db
-.sonarqube
-coveragereport/
+Storage/
+desktop.ini
 __*

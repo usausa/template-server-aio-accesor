@@ -34,6 +34,8 @@ namespace Template.Services
                 {
                     await ItemAccessor.UpdateItem(tx, entity).ConfigureAwait(false);
                 }
+
+                await tx.CommitAsync().ConfigureAwait(false);
             }).ConfigureAwait(false);
         }
     }

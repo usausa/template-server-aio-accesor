@@ -82,12 +82,6 @@ namespace Template.Web
                 options.MultipartBodyLengthLimit = Int64.MaxValue;
             });
 
-            services.Configure<IISServerOptions>(options =>
-            {
-                // Default 30MB
-                options.MaxRequestBodySize = 262_144_000;
-            });
-
             // XForward
             services.Configure<ForwardedHeadersOptions>(options =>
             {
