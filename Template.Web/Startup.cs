@@ -4,7 +4,6 @@ namespace Template.Web
     using System.Data;
     using System.Globalization;
     using System.Linq;
-    using System.Net;
     using System.Text;
     using System.Text.Encodings.Web;
     using System.Text.Unicode;
