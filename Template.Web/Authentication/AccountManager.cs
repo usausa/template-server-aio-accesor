@@ -7,28 +7,39 @@ namespace Template.Web.Authentication
     using Microsoft.AspNetCore.Authentication.Cookies;
     using Microsoft.AspNetCore.Http;
 
+    using Template.Components.Security;
+    using Template.Services;
+
     public class AccountManager
     {
         private IHttpContextAccessor HttpContextAccessor { get; }
 
-        public AccountManager(IHttpContextAccessor httpContextAccessor)
+        private IPasswordProvider PasswordProvider { get; }
+
+        private AccountService AccountService { get; }
+
+        public AccountManager(
+            IHttpContextAccessor httpContextAccessor,
+            IPasswordProvider passwordProvider,
+            AccountService accountService)
         {
             HttpContextAccessor = httpContextAccessor;
+            PasswordProvider = passwordProvider;
+            AccountService = accountService;
         }
 
-        public async ValueTask<bool> LoginAsync(string userId, string password)
+        public async ValueTask<bool> LoginAsync(string id, string password)
         {
-            // TODO
-            if (userId != password)
+            var account = await AccountService.QueryAccountAsync(id);
+            if ((account is null) || !PasswordProvider.Match(password, account.PasswordHash))
             {
                 return false;
             }
 
             var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
-            // TODO claims & role
-            identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, userId));
-            identity.AddClaim(new Claim(ClaimTypes.Name, userId));
-            if (userId.Length > 3)
+            identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, id));
+            identity.AddClaim(new Claim(ClaimTypes.Name, account.Name));
+            if (account.IsAdmin)
             {
                 identity.AddClaim(new Claim(ClaimTypes.Role, Role.Admin));
             }

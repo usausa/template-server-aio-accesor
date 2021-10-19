@@ -51,4 +51,8 @@
     <Folder Include="Areas\Hub\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="Areas\Default\Views\Account\Login.cshtml" />
+  </ItemGroup>
+
 </Project>

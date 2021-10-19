@@ -9,6 +9,6 @@ namespace Template.Accessors
     public interface IAccountAccessor
     {
         [QueryFirstOrDefault]
-        ValueTask<AccountEntity> QueryAccountAsync(string id);
+        ValueTask<AccountEntity?> QueryAccountAsync(string id);
     }
 }

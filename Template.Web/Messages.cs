@@ -9,5 +9,9 @@ namespace Template.Web
         //public const string MaxLength = "{1}文字以内で入力してください";
 
         //public const string Pattern = "入力形式が不正です";
+
+        // Account
+
+        public const string LoginFailed = "ログインに失敗しました";
     }
 }

@@ -17,7 +17,7 @@ namespace Template.Services
             AccountAccessor = accountAccessor.Accessor;
         }
 
-        public ValueTask<AccountEntity> QueryAccountAsync(string id) =>
+        public ValueTask<AccountEntity?> QueryAccountAsync(string id) =>
             AccountAccessor.QueryAccountAsync(id);
     }
 }
