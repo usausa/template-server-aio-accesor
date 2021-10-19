@@ -15,12 +15,4 @@
     <PackageReference Include="ZXing.Net" Version="0.16.6" />
   </ItemGroup>
 
-  <ItemGroup>
-    <SqlFiles Remove="Accessors\Sql\IItemAccessor.QueryItemList.sql" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <SqlFiles Remove="Accessors\Sql\IItemAccessor.UpdateItem.sql" />
-  </ItemGroup>
-
 </Project>

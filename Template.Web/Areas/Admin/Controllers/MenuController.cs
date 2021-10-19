@@ -1,13 +1,11 @@
-namespace Template.Web.Areas.Default.Controllers
+namespace Template.Web.Areas.Admin.Controllers
 {
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     using Template.Web.Infrastructure.Mvc;
 
-    public class DashboardController : BaseDefaultController
+    public class MenuController : BaseAdminController
     {
-        [AllowAnonymous]
         [DefaultRoute]
         [HttpGet]
         public IActionResult Index()
