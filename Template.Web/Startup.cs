@@ -3,9 +3,13 @@ namespace Template.Web
     using System;
     using System.Data;
     using System.Globalization;
+    using System.Linq;
+    using System.Net;
     using System.Text;
     using System.Text.Encodings.Web;
     using System.Text.Unicode;
+
+    using AspNetCoreComponents.IpFilter;
 
     using AutoMapper;
 
@@ -23,6 +27,8 @@ namespace Template.Web
     using Microsoft.Extensions.Hosting;
     using Microsoft.Net.Http.Headers;
     using Microsoft.OpenApi.Models;
+
+    using Prometheus;
 
     using Smart.AspNetCore;
     using Smart.AspNetCore.ApplicationModels;
@@ -72,6 +78,7 @@ namespace Template.Web
 
             // Settings
             var serverSetting = Configuration.GetSection("Server").Get<ServerSetting>();
+            services.AddSingleton(serverSetting);
 
             // Size limit
             services.Configure<FormOptions>(options =>
@@ -230,7 +237,7 @@ namespace Template.Web
             // TODO
         }
 
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, ServerSetting serverSetting)
         {
             if (!env.IsProduction())
             {
@@ -246,7 +253,11 @@ namespace Template.Web
 
             app.UseStatusCodePagesWithReExecute("/error/{0}");
 
+            app.UsePathRestrict("/health", serverSetting.AllowHealth?.Select(System.Net.IPNetwork.Parse).ToArray());
             app.UseHealthChecks("/health");
+
+            app.UsePathRestrict("/metrics", serverSetting.AllowMetrics?.Select(System.Net.IPNetwork.Parse).ToArray());
+            app.UseHttpMetrics();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles(new StaticFileOptions
@@ -286,7 +297,10 @@ namespace Template.Web
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+
                 //endpoints.MapHub<SummaryHub>("/hub/summary");
+
+                endpoints.MapMetrics();
             });
         }
     }
