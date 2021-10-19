@@ -14,6 +14,7 @@ namespace Template.Web
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Http.Features;
+    using Microsoft.AspNetCore.HttpOverrides;
     using Microsoft.AspNetCore.ResponseCompression;
     using Microsoft.AspNetCore.Routing;
     using Microsoft.Data.SqlClient;
@@ -33,8 +34,10 @@ namespace Template.Web
     using StackExchange.Profiling;
     using StackExchange.Profiling.Data;
 
+    using Template.Components.Json;
+    using Template.Components.Security;
+    using Template.Services;
     using Template.Web.Authentication;
-    using Template.Web.Infrastructure.Json;
     using Template.Web.Infrastructure.Token;
     using Template.Web.Settings;
 
@@ -70,7 +73,43 @@ namespace Template.Web
             // Settings
             var serverSetting = Configuration.GetSection("Server").Get<ServerSetting>();
 
-            // Mvc
+            // Size limit
+            services.Configure<FormOptions>(options =>
+            {
+                // Default 4MB
+                options.ValueLengthLimit = int.MaxValue;
+                // Default 128MB
+                options.MultipartBodyLengthLimit = Int64.MaxValue;
+            });
+
+            services.Configure<IISServerOptions>(options =>
+            {
+                // Default 30MB
+                options.MaxRequestBodySize = 262_144_000;
+            });
+
+            // XForward
+            services.Configure<ForwardedHeadersOptions>(options =>
+            {
+                options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+
+                // Do not restrict to local network/proxy
+                options.KnownNetworks.Clear();
+                options.KnownProxies.Clear();
+            });
+
+            // CORS
+            //services.Configure<CorsOptions>(options =>
+            //{
+            //});
+
+            // Route
+            services.Configure<RouteOptions>(options =>
+            {
+                options.AppendTrailingSlash = true;
+            });
+
+            // Filter
             services.AddSingleton<ExceptionStatusFilter>();
             services.AddTimeLogging(options =>
             {
@@ -78,17 +117,7 @@ namespace Template.Web
             });
             services.AddSingleton(new TokenSetting { Token = serverSetting.ApiToken });
 
-            services.Configure<RouteOptions>(options =>
-            {
-                options.AppendTrailingSlash = true;
-            });
-
-            services.Configure<FormOptions>(options =>
-            {
-                options.ValueLengthLimit = int.MaxValue;
-                options.MultipartBodyLengthLimit = Int64.MaxValue;
-            });
-
+            // Mvc
             services
                 .AddControllersWithViews(options =>
                 {
@@ -184,22 +213,18 @@ namespace Template.Web
             });
 
             // Security
-            // TODO
-            //services.AddSingleton<SaltHashPasswordOptions>();
-            //services.AddSingleton<IPasswordProvider, SaltHashPasswordProvider>();
+            services.AddSingleton<SaltHashPasswordOptions>();
+            services.AddSingleton<IPasswordProvider, SaltHashPasswordProvider>();
+
+            // Service
+            services.AddSingleton<AccountService>();
+            services.AddSingleton<DataService>();
+            services.AddSingleton<ItemService>();
 
             // Csv
             // TODO
             //services.AddSingleton<CsvImporter>();
             //services.AddSingleton<CsvExporter>();
-
-            // Context
-            // TODO
-            //services.AddSingleton<IServiceContext>(new ServiceContext(serverSetting.SystemName));
-
-            // Service
-            // TODO
-            //services.AddSingleton<DataService>();
 
             // Report
             // TODO
@@ -214,10 +239,12 @@ namespace Template.Web
             if (!env.IsProduction())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseForwardedHeaders();
             }
             else
             {
                 app.UseExceptionHandler("/error/500");
+                app.UseForwardedHeaders();
                 app.UseHsts();
             }
 
@@ -254,6 +281,8 @@ namespace Template.Web
             }
 
             app.UseRouting();
+
+            //app.UseCors();
 
             app.UseAuthentication();
             app.UseAuthorization();

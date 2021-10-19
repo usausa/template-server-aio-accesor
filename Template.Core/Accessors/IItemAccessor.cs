@@ -1,6 +1,7 @@
 namespace Template.Accessors
 {
     using System.Collections.Generic;
+    using System.Data.Common;
     using System.Threading.Tasks;
 
     using Template.Models.Entity;
@@ -8,12 +9,12 @@ namespace Template.Accessors
     using Smart.Data.Accessor.Attributes;
 
     [DataAccessor]
-    public interface IDataAccessor
+    public interface IItemAccessor
     {
         [Query]
-        ValueTask<List<DataEntity>> QueryDataListAsync(bool? flag, int limit, int offset);
+        ValueTask<List<ItemEntity>> QueryItemListAsync(string category);
 
-        [ExecuteScalar]
-        ValueTask<int> CountDataAsync(bool? flag);
+        [Execute]
+        ValueTask<int> UpdateItem(DbTransaction tx, ItemEntity entity);
     }
 }

@@ -1,4 +1,4 @@
-namespace Template.Web.Infrastructure.Json
+namespace Template.Components.Json
 {
     using System;
     using System.Globalization;
