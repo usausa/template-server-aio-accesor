@@ -41,8 +41,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Api\Models\" />
-    <Folder Include="Areas\Api\Controllers\" />
+    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Example\Controllers\" />
     <Folder Include="Areas\Example\Models\" />
     <Folder Include="Areas\Hub\" />

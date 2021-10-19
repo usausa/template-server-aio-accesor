@@ -1,0 +1,45 @@
+namespace Template.Web.Areas.Api.Controllers
+{
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using AutoMapper;
+
+    using Microsoft.AspNetCore.Mvc;
+
+    using Template.Models.Entity;
+    using Template.Services;
+    using Template.Web.Areas.Api.Models;
+
+    public class ItemController : BaseApiController
+    {
+        private IMapper Mapper { get; }
+
+        private ItemService ItemService { get; }
+
+        public ItemController(
+            IMapper mapper,
+            ItemService itemService)
+        {
+            Mapper = mapper;
+            ItemService = itemService;
+        }
+
+        [HttpGet("{category}")]
+        public async ValueTask<IActionResult> List([FromRoute] string category)
+        {
+            return Ok(new ItemListResponse
+            {
+                Entries = (await ItemService.QueryItemListAsync(category)).ToArray()
+            });
+        }
+
+        [HttpPost]
+        public async ValueTask<IActionResult> Update([FromBody] ItemUpdateRequest request)
+        {
+            await ItemService.UpdateItemList(request.Entries.Select(x => Mapper.Map<ItemEntity>(x)));
+
+            return Ok();
+        }
+    }
+}

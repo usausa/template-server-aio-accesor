@@ -1,4 +1,4 @@
-namespace Template.Web.Areas.Admin.Models
+namespace Template.Web.Areas.Api.Models
 {
     using System.ComponentModel.DataAnnotations;
     using System.Diagnostics.CodeAnalysis;
