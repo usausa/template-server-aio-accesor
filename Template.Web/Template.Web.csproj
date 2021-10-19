@@ -35,6 +35,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="bundleconfig.json" />
+    <Content Remove="libman.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="ipaexg.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
