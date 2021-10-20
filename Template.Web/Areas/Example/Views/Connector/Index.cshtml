@@ -1,0 +1,8 @@
+@{
+    ViewData.SetTitle("外部API呼び出し");
+
+    SampleResponse? response = ViewBag.Entity;
+}
+
+<div if="@(response is null)" class="alert alert-danger" role="alert">API呼び出しに失敗しました。</div>
+<div if="@(response is not null)" class="alert alert-success" role="alert">IP: @response!.Ip</div>

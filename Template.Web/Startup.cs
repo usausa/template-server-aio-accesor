@@ -33,6 +33,8 @@ namespace Template.Web
 
     using Prometheus;
 
+    using Rester;
+
     using Smart.AspNetCore;
     using Smart.AspNetCore.ApplicationModels;
     using Smart.AspNetCore.Filters;
@@ -197,7 +199,20 @@ namespace Template.Web
                 c.AddProfile<Template.Web.Areas.Example.MappingProfile>();
             })));
 
-            // Http
+            // HttpClient
+            var connectorSetting = Configuration.GetSection("Connector").Get<ConnectorSetting>();
+            services.AddHttpClient(ConnectorNames.Sample, c =>
+            {
+                c.BaseAddress = new Uri(connectorSetting.SampleBaseUrl);
+                // [MEMO] Set headers here
+            });
+
+            RestConfig.Default.UseJsonSerializer(config =>
+            {
+                config.Converters.Add(new DateTimeConverter());
+                config.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
+                config.IgnoreNullValues = true;
+            });
 
             // Database
             var connectionString = Configuration.GetConnectionString("Default");
