@@ -1,4 +1,4 @@
-namespace Template.Web.Infrastructure
+namespace Template.Web.Infrastructure.Models
 {
     public sealed class AjaxResult
     {
