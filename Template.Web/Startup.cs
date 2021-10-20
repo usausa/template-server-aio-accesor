@@ -1,8 +1,10 @@
 namespace Template.Web
 {
     using System;
+    using System.Collections.Generic;
     using System.Data;
     using System.Globalization;
+    using System.IO;
     using System.Linq;
     using System.Text;
     using System.Text.Encodings.Web;
@@ -27,6 +29,8 @@ namespace Template.Web
     using Microsoft.Net.Http.Headers;
     using Microsoft.OpenApi.Models;
 
+    using PdfSharpCore.Fonts;
+
     using Prometheus;
 
     using Smart.AspNetCore;
@@ -40,6 +44,7 @@ namespace Template.Web
     using StackExchange.Profiling.Data;
 
     using Template.Components.Json;
+    using Template.Components.Report;
     using Template.Components.Security;
     using Template.Services;
     using Template.Web.Authentication;
@@ -64,12 +69,10 @@ namespace Template.Web
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
             // PDF
-            // TODO
-            // ReSharper disable once CommentTypo
-            //GlobalFontSettings.FontResolver = new FontResolver(Directory.GetCurrentDirectory(), FontNames.Gothic, new Dictionary<string, string>
-            //{
-            //    { FontNames.Gothic, "ipaexg.ttf" }
-            //});
+            GlobalFontSettings.FontResolver = new FontResolver(Directory.GetCurrentDirectory(), FontNames.Gothic, new Dictionary<string, string>
+            {
+                { FontNames.Gothic, "ipaexg.ttf" }
+            });
 
             // Add framework services.
             services.AddHttpContextAccessor();
