@@ -24,46 +24,44 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-light bg-light border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="default" asp-controller="Dashboard" asp-action="Index">テンプレート</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item active">
-                            <a class="nav-link text-dark" href="#"><i class="fas fa-project-diagram"></i> ○○機能</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle text-dark" toggle="dropdown" role="button" data-toggle="dropdown"><i class="fas fa-edit"></i> ○○機能</a>
-                            <div class="dropdown-menu" role="menu">
-                                <a class="dropdown-item" href="#"><i class="fas fa-chart-line"></i> ○○機能</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#"><i class="fas fa-calendar-alt"></i> ○○機能</a>
-                            </div>
-                        </li>
-                        <li if="@User.IsAdmin()" class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle text-dark" toggle="dropdown" role="button" data-toggle="dropdown"><i class="fas fa-tools"></i> 管理機能</a>
-                            <div class="dropdown-menu" role="menu">
-                                <a class="dropdown-item" href="#"><i class="fas fa-print"></i> ○○管理</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#"><i class="fas fa-clock"></i> ○○管理</a>
-                            </div>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav">
-                        <li if="@(!User.IsAuthenticated())" class="nav-item">
-                            <a class="nav-link text-dark" asp-area="default" asp-controller="Account" asp-action="Login"><i class="fas fa-sign-in-alt"></i> ログイン</a>
-                        </li>
-                        <li if="@User.IsAuthenticated()" class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle text-dark" toggle="dropdown" role="button" data-toggle="dropdown"><i class="fas fa-user-alt"></i> @User.Identity!.Name</a>
-                            <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                <a class="dropdown-item" asp-area="default" asp-controller="Account" asp-action="Logout"><i class="fas fa-sign-out-alt"></i> ログアウト</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+            <a class="navbar-brand" asp-area="default" asp-controller="Dashboard" asp-action="Index">テンプレート</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-project-diagram"></i> ○○機能</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" toggle="dropdown" role="button" data-toggle="dropdown"><i class="fas fa-edit"></i> ○○機能</a>
+                        <div class="dropdown-menu" role="menu">
+                            <a class="dropdown-item" href="#"><i class="fas fa-chart-line"></i> ○○機能</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#"><i class="fas fa-calendar-alt"></i> ○○機能</a>
+                        </div>
+                    </li>
+                    <li if="@User.IsAdmin()" class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" toggle="dropdown" role="button" data-toggle="dropdown"><i class="fas fa-tools"></i> 管理機能</a>
+                        <div class="dropdown-menu" role="menu">
+                            <a class="dropdown-item" href="#"><i class="fas fa-print"></i> ○○管理</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#"><i class="fas fa-clock"></i> ○○管理</a>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li if="@(!User.IsAuthenticated())" class="nav-item">
+                        <a class="nav-link" asp-area="default" asp-controller="Account" asp-action="Login"><i class="fas fa-sign-in-alt"></i> ログイン</a>
+                    </li>
+                    <li if="@User.IsAuthenticated()" class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" toggle="dropdown" role="button" data-toggle="dropdown"><i class="fas fa-user-alt"></i> @User.Identity!.Name</a>
+                        <div class="dropdown-menu dropdown-menu-right" role="menu">
+                            <a class="dropdown-item" asp-area="default" asp-controller="Account" asp-action="Logout"><i class="fas fa-sign-out-alt"></i> ログアウト</a>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </nav>
     </header>
