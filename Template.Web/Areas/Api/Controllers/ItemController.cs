@@ -11,7 +11,7 @@ namespace Template.Web.Areas.Api.Controllers
     using Template.Services;
     using Template.Web.Areas.Api.Models;
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5391", Justification = "API Controller")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Security", "CA5391", Justification = "API Controller")]
     public class ItemController : BaseApiController
     {
         private IMapper Mapper { get; }
