@@ -4,16 +4,12 @@ ASP.NET Core template project.
 
 # TODO
 
-* External API call
-* Storage API
-* Paging + State
+* Paging + State + Exception
 * CSV import/export + Bulkload + Delete physical result
 * PDF report
 * SignalR Hub (Update view)
-* SelectListBuilder
-* AjaxOnly
-* SubmitParameter
-* Exception
-* Test project
+* JavaScript(AjaxOnly, ...)
+* Forms(SelectListBuilder, SubmitParameter, ...)
+* Test+
 * Metrics+
 * UI+
