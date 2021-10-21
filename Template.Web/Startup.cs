@@ -26,6 +26,7 @@ namespace Template.Web
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using Microsoft.Extensions.Options;
     using Microsoft.Net.Http.Headers;
     using Microsoft.OpenApi.Models;
 
@@ -48,6 +49,7 @@ namespace Template.Web
     using Template.Components.Json;
     using Template.Components.Report;
     using Template.Components.Security;
+    using Template.Components.Storage;
     using Template.Services;
     using Template.Web.Authentication;
     using Template.Web.Infrastructure.Token;
@@ -234,11 +236,15 @@ namespace Template.Web
             services.AddSingleton<SaltHashPasswordOptions>();
             services.AddSingleton<IPasswordProvider, SaltHashPasswordProvider>();
 
+            // Storage
+            services.Configure<FileStorageOptions>(Configuration.GetSection("Storage"));
+            services.AddSingleton(p => p.GetService<IOptions<FileStorageOptions>>()!.Value);
+            services.AddSingleton<IStorage, FileStorage>();
+
             // Service
             services.AddSingleton<AccountService>();
             services.AddSingleton<DataService>();
             services.AddSingleton<ItemService>();
-            services.AddSingleton<StorageService>();
             services.AddSingleton<ConnectorService>();
 
             // Csv
