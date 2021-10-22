@@ -1,5 +1,6 @@
 namespace Template.Services
 {
+    using System;
     using System.Threading.Tasks;
 
     using Template.Accessors;
@@ -11,6 +12,12 @@ namespace Template.Services
     public class DataSearchParameter : Pageable
     {
         public bool? Flag { get; set; }
+
+        public string? Name { get; set; }
+
+        public DateTime? DateTimeFrom { get; set; }
+
+        public DateTime? DateTimeTo { get; set; }
     }
 
     public class DataService

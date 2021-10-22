@@ -1,3 +1,84 @@
 @{
     ViewData.SetTitle("ダッシュボード");
 }
+
+<div class="card-deck">
+    <div class="card mb-3 shadow-sm">
+        <div class="card-header p-1 text-center">
+            <h4 class="m-0 font-weight-normal">一覧画面</h4>
+        </div>
+        <div class="card-body pt-1 pb-1">
+            <ul class="list-unstyled mb-0">
+                <li><a asp-area="Example" asp-controller="Data" asp-action="List">一覧(検索/CSV)</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="card mb-3 shadow-sm">
+        <div class="card-header p-1 text-center">
+            <h4 class="m-0 font-weight-normal">Group2</h4>
+        </div>
+        <div class="card-body pt-1 pb-1">
+            <ul class="list-unstyled mb-0">
+                <li>Example1</li>
+                <li>Example2</li>
+                <li>Example3</li>
+                <li>Example4</li>
+            </ul>
+        </div>
+    </div>
+    <div class="card mb-3 shadow-sm">
+        <div class="card-header p-1 text-center">
+            <h4 class="m-0 font-weight-normal">Group3</h4>
+        </div>
+        <div class="card-body pt-1 pb-1">
+            <ul class="list-unstyled mb-0">
+                <li>Example1</li>
+                <li>Example2</li>
+                <li>Example3</li>
+                <li>Example4</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="card-deck">
+    <div class="card mb-3 shadow-sm">
+        <div class="card-header p-1 text-center">
+            <h4 class="m-0 font-weight-normal">Group4</h4>
+        </div>
+        <div class="card-body pt-1 pb-1">
+            <ul class="list-unstyled mb-0">
+                <li>Example1</li>
+                <li>Example2</li>
+                <li>Example3</li>
+                <li>Example4</li>
+            </ul>
+        </div>
+    </div>
+    <div class="card mb-3 shadow-sm">
+        <div class="card-header p-1 text-center">
+            <h4 class="m-0 font-weight-normal">管理</h4>
+        </div>
+        <div class="card-body pt-1 pb-1">
+            <ul class="list-unstyled mb-0">
+                <li>Example1</li>
+                <li>Example2</li>
+                <li>Example3</li>
+                <li>Example4</li>
+            </ul>
+        </div>
+    </div>
+    <div class="card mb-3 shadow-sm">
+        <div class="card-header p-1 text-center">
+            <h4 class="m-0 font-weight-normal">その他</h4>
+        </div>
+        <div class="card-body pt-1 pb-1">
+            <ul class="list-unstyled mb-0">
+                @* ReSharper disable Html.PathError *@
+                <li><a href="/swagger">Swagger</a></li>
+                <li><a href="/metrics">Prometheus</a></li>
+                <li><a href="/health">Health check</a></li>
+                @* ReSharper restore Html.PathError *@
+            </ul>
+        </div>
+    </div>
+</div>

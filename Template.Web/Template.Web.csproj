@@ -56,7 +56,6 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Example\Models\" />
     <Folder Include="Areas\Hub\" />
   </ItemGroup>
 

@@ -6,12 +6,18 @@ namespace Template.Web.Infrastructure.ViewHelpers
     public static class ViewExtensions
     {
         //--------------------------------------------------------------------------------
-        // Basic
+        // Expression
         //--------------------------------------------------------------------------------
 
         public static string Then(this bool condition, string value) => condition ? value : string.Empty;
 
         public static string NotThen(this bool condition, string value) => !condition ? value : string.Empty;
+
+        //--------------------------------------------------------------------------------
+        // Basic
+        //--------------------------------------------------------------------------------
+
+        public static string Active(this bool value) => value ? "active" : string.Empty;
 
         //--------------------------------------------------------------------------------
         // Format

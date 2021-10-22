@@ -1,0 +1,31 @@
+@{
+    ViewData.SetTitle("データ一覧");
+
+    Paged<DataEntity> paged = ViewBag.Paged;
+}
+
+<table class="table table-sm table-striped table-bordered mb-1">
+    <thead>
+    <tr>
+        <th class="text-right">ID</th>
+        <th>名前</th>
+        <th class="text-center">フラグ</th>
+        <th>日時</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var entry in paged.EmptyIfNull())
+    {
+        <tr>
+            <td class="text-right">@entry.Id</td>
+            <td>@entry.Name</td>
+            <td class="text-center">@entry.Flag</td>
+            <td>@entry.DateTime.DateTime()</td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<div if="@(paged != null)" class="text-center">
+    @await Html.PartialAsync("_Pager", paged)
+</div>
