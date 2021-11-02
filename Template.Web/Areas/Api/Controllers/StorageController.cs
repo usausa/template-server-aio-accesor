@@ -33,21 +33,12 @@ namespace Template.Web.Areas.Api.Controllers
             Storage = storage;
         }
 
-        [HttpGet]
-        public async ValueTask<IActionResult> Get()
-        {
-            Log.LogInformation("Get. path=[]");
-
-            var files = await Storage.ListAsync(string.Empty);
-            return Ok(files);
-        }
-
         [HttpGet("{**path}")]
-        public async ValueTask<IActionResult> Get([FromRoute] string path)
+        public async ValueTask<IActionResult> Get([FromRoute] string? path = "/")
         {
             Log.LogInformation($"Get. path=[{path}]");
 
-            if (path.EndsWith('/'))
+            if (path!.EndsWith('/'))
             {
                 if (!await Storage.DirectoryExistsAsync(path))
                 {

@@ -18,6 +18,11 @@ namespace Template.Components.Storage
 
         private string NormalizePath(string path)
         {
+            if (path.EndsWith('/'))
+            {
+                path = path[..^1];
+            }
+
             var fullPath = Path.Combine(root, path);
             if (fullPath.Length < root.Length)
             {
