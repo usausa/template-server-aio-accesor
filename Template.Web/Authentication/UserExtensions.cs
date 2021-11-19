@@ -1,11 +1,10 @@
-namespace Template.Web.Authentication
+namespace Template.Web.Authentication;
+
+using System.Security.Claims;
+
+public static class UserExtensions
 {
-    using System.Security.Claims;
+    public static bool IsAuthenticated(this ClaimsPrincipal user) => user.Identity?.IsAuthenticated ?? false;
 
-    public static class UserExtensions
-    {
-        public static bool IsAuthenticated(this ClaimsPrincipal user) => user.Identity?.IsAuthenticated ?? false;
-
-        public static bool IsAdmin(this ClaimsPrincipal user) => user.IsInRole(Role.Admin);
-    }
+    public static bool IsAdmin(this ClaimsPrincipal user) => user.IsInRole(Role.Admin);
 }

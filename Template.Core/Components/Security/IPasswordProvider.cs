@@ -1,9 +1,8 @@
-namespace Template.Components.Security
-{
-    public interface IPasswordProvider
-    {
-        bool Match(string password, string hash);
+namespace Template.Components.Security;
 
-        string GenerateHash(string password);
-    }
+public interface IPasswordProvider
+{
+    bool Match(string password, string hash);
+
+    string GenerateHash(string password);
 }

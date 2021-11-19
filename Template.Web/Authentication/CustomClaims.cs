@@ -1,8 +1,7 @@
-namespace Template.Web.Authentication
+namespace Template.Web.Authentication;
+
+public static class CustomClaims
 {
-    public static class CustomClaims
-    {
-        // TODO
-        //public const string DepartmentCode = nameof(DepartmentCode);
-    }
+    // TODO
+    //public const string DepartmentCode = nameof(DepartmentCode);
 }

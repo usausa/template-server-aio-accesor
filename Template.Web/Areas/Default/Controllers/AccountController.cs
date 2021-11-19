@@ -1,53 +1,52 @@
-namespace Template.Web.Areas.Default.Controllers
+namespace Template.Web.Areas.Default.Controllers;
+
+using System;
+using System.Threading.Tasks;
+
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+
+using Template.Web.Areas.Default.Models;
+using Template.Web.Authentication;
+
+[AllowAnonymous]
+public class AccountController : BaseDefaultController
 {
-    using System;
-    using System.Threading.Tasks;
+    private AccountManager AccountManager { get; }
 
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Mvc;
-
-    using Template.Web.Areas.Default.Models;
-    using Template.Web.Authentication;
-
-    [AllowAnonymous]
-    public class AccountController : BaseDefaultController
+    public AccountController(AccountManager accountManager)
     {
-        private AccountManager AccountManager { get; }
+        AccountManager = accountManager;
+    }
 
-        public AccountController(AccountManager accountManager)
-        {
-            AccountManager = accountManager;
-        }
+    [HttpGet]
+    public IActionResult Login()
+    {
+        return View();
+    }
 
-        [HttpGet]
-        public IActionResult Login()
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async ValueTask<IActionResult> Login([FromForm] AccountLoginForm form, string? returnUrl)
+    {
+        if (ModelState.IsValid)
         {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async ValueTask<IActionResult> Login([FromForm] AccountLoginForm form, string? returnUrl)
-        {
-            if (ModelState.IsValid)
+            if (await AccountManager.LoginAsync(form.Id, form.Password))
             {
-                if (await AccountManager.LoginAsync(form.Id, form.Password))
-                {
-                    return Redirect(String.IsNullOrEmpty(returnUrl) ? "~/" : returnUrl);
-                }
-
-                ModelState.AddModelError(nameof(form.Password), Messages.LoginFailed);
+                return Redirect(String.IsNullOrEmpty(returnUrl) ? "~/" : returnUrl);
             }
 
-            return View(form);
+            ModelState.AddModelError(nameof(form.Password), Messages.LoginFailed);
         }
 
-        [HttpGet]
-        public async ValueTask<IActionResult> Logout()
-        {
-            await AccountManager.LogoutAsync();
+        return View(form);
+    }
 
-            return LocalRedirect("~/");
-        }
+    [HttpGet]
+    public async ValueTask<IActionResult> Logout()
+    {
+        await AccountManager.LogoutAsync();
+
+        return LocalRedirect("~/");
     }
 }

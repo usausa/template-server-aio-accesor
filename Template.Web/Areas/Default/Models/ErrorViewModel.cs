@@ -1,15 +1,14 @@
-namespace Template.Web.Areas.Default.Models
+namespace Template.Web.Areas.Default.Models;
+
+using System;
+using System.Diagnostics.CodeAnalysis;
+
+public class ErrorViewModel
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
+    public int StatusCode { get; set; }
 
-    public class ErrorViewModel
-    {
-        public int StatusCode { get; set; }
+    [AllowNull]
+    public string RequestId { get; set; }
 
-        [AllowNull]
-        public string RequestId { get; set; }
-
-        public bool ShowRequestId => !String.IsNullOrEmpty(RequestId);
-    }
+    public bool ShowRequestId => !String.IsNullOrEmpty(RequestId);
 }

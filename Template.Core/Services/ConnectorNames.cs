@@ -1,7 +1,6 @@
-namespace Template.Services
+namespace Template.Services;
+
+public static class ConnectorNames
 {
-    public static class ConnectorNames
-    {
-        public const string Sample = nameof(Sample);
-    }
+    public const string Sample = nameof(Sample);
 }

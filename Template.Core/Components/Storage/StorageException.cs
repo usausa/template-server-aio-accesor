@@ -1,21 +1,20 @@
-namespace Template.Components.Storage
+namespace Template.Components.Storage;
+
+using System;
+
+public sealed class StorageException : Exception
 {
-    using System;
-
-    public sealed class StorageException : Exception
+    public StorageException()
     {
-        public StorageException()
-        {
-        }
+    }
 
-        public StorageException(string message)
-            : base(message)
-        {
-        }
+    public StorageException(string message)
+        : base(message)
+    {
+    }
 
-        public StorageException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+    public StorageException(string message, Exception innerException)
+        : base(message, innerException)
+    {
     }
 }

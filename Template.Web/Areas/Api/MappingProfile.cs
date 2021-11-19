@@ -1,15 +1,14 @@
-namespace Template.Web.Areas.Api
+namespace Template.Web.Areas.Api;
+
+using AutoMapper;
+
+using Template.Models.Entity;
+using Template.Web.Areas.Api.Models;
+
+public class MappingProfile : Profile
 {
-    using AutoMapper;
-
-    using Template.Models.Entity;
-    using Template.Web.Areas.Api.Models;
-
-    public class MappingProfile : Profile
+    public MappingProfile()
     {
-        public MappingProfile()
-        {
-            CreateMap<ItemUpdateRequestEntry, ItemEntity>();
-        }
+        CreateMap<ItemUpdateRequestEntry, ItemEntity>();
     }
 }

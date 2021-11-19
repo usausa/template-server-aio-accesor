@@ -1,7 +1,6 @@
-namespace Template.Mock
+namespace Template.Mock;
+
+public static class ServiceCollectionExtensions
 {
-    public static class ServiceCollectionExtensions
-    {
-        // TODO helper for WebApplicationFactory
-    }
+    // TODO helper for WebApplicationFactory
 }

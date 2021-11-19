@@ -1,9 +1,8 @@
-namespace Template.Models.Paging
-{
-    public interface IPageOver
-    {
-        int TotalPage { get; }
+namespace Template.Models.Paging;
 
-        bool IsOver { get; }
-    }
+public interface IPageOver
+{
+    int TotalPage { get; }
+
+    bool IsOver { get; }
 }

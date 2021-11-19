@@ -1,32 +1,31 @@
-namespace Template.Web.Areas.Example.Controllers
+namespace Template.Web.Areas.Example.Controllers;
+
+using System.Threading.Tasks;
+
+using Microsoft.AspNetCore.Mvc;
+
+using Template.Services;
+using Template.Web.Infrastructure.Mvc;
+
+public class ConnectorController : BaseExampleController
 {
-    using System.Threading.Tasks;
+    private ConnectorService ConnectorService { get; }
 
-    using Microsoft.AspNetCore.Mvc;
-
-    using Template.Services;
-    using Template.Web.Infrastructure.Mvc;
-
-    public class ConnectorController : BaseExampleController
+    public ConnectorController(ConnectorService connectorService)
     {
-        private ConnectorService ConnectorService { get; }
+        ConnectorService = connectorService;
+    }
 
-        public ConnectorController(ConnectorService connectorService)
+    [AreaControllerRoute]
+    [HttpGet]
+    public async ValueTask<IActionResult> Index()
+    {
+        var response = await ConnectorService.GetSampleAsync();
+        if (response is not null)
         {
-            ConnectorService = connectorService;
+            ViewBag.Entity = response;
         }
 
-        [AreaControllerRoute]
-        [HttpGet]
-        public async ValueTask<IActionResult> Index()
-        {
-            var response = await ConnectorService.GetSampleAsync();
-            if (response is not null)
-            {
-                ViewBag.Entity = response;
-            }
-
-            return View();
-        }
+        return View();
     }
 }

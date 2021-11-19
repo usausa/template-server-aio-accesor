@@ -1,10 +1,9 @@
-namespace Template.Web.Infrastructure.Token
-{
-    using System.Diagnostics.CodeAnalysis;
+namespace Template.Web.Infrastructure.Token;
 
-    public class TokenSetting
-    {
-        [AllowNull]
-        public string Token { get; set; }
-    }
+using System.Diagnostics.CodeAnalysis;
+
+public class TokenSetting
+{
+    [AllowNull]
+    public string Token { get; set; }
 }

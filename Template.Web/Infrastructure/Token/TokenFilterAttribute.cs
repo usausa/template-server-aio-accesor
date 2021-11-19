@@ -1,36 +1,35 @@
-namespace Template.Web.Infrastructure.Token
+namespace Template.Web.Infrastructure.Token;
+
+using System;
+
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
+
+[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
+public sealed class TokenFilterAttribute : Attribute, IFilterFactory
 {
-    using System;
+    public bool IsReusable => true;
 
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.Filters;
-
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
-    public sealed class TokenFilterAttribute : Attribute, IFilterFactory
+    public IFilterMetadata CreateInstance(IServiceProvider serviceProvider)
     {
-        public bool IsReusable => true;
+        return new TokenFilter((TokenSetting)serviceProvider.GetService(typeof(TokenSetting))!);
+    }
 
-        public IFilterMetadata CreateInstance(IServiceProvider serviceProvider)
+    public sealed class TokenFilter : IAuthorizationFilter
+    {
+        private readonly TokenSetting setting;
+
+        public TokenFilter(TokenSetting setting)
         {
-            return new TokenFilter((TokenSetting)serviceProvider.GetService(typeof(TokenSetting))!);
+            this.setting = setting;
         }
 
-        public sealed class TokenFilter : IAuthorizationFilter
+        public void OnAuthorization(AuthorizationFilterContext context)
         {
-            private readonly TokenSetting setting;
-
-            public TokenFilter(TokenSetting setting)
+            if (!context.HttpContext.Request.Headers.TryGetValue("token", out var value) ||
+                (value != setting.Token))
             {
-                this.setting = setting;
-            }
-
-            public void OnAuthorization(AuthorizationFilterContext context)
-            {
-                if (!context.HttpContext.Request.Headers.TryGetValue("token", out var value) ||
-                    (value != setting.Token))
-                {
-                    context.Result = new UnauthorizedResult();
-                }
+                context.Result = new UnauthorizedResult();
             }
         }
     }

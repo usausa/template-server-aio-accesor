@@ -1,7 +1,6 @@
-namespace Template.Components.Report
+namespace Template.Components.Report;
+
+public static class FontNames
 {
-    public static class FontNames
-    {
-        public const string Gothic = nameof(Gothic);
-    }
+    public const string Gothic = nameof(Gothic);
 }

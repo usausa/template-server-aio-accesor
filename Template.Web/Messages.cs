@@ -1,17 +1,16 @@
-namespace Template.Web
+namespace Template.Web;
+
+public static class Messages
 {
-    public static class Messages
-    {
-        // Basic
+    // Basic
 
-        public const string Required = "入力してください";
+    public const string Required = "入力してください";
 
-        //public const string MaxLength = "{1}文字以内で入力してください";
+    //public const string MaxLength = "{1}文字以内で入力してください";
 
-        //public const string Pattern = "入力形式が不正です";
+    //public const string Pattern = "入力形式が不正です";
 
-        // Account
+    // Account
 
-        public const string LoginFailed = "ログインに失敗しました";
-    }
+    public const string LoginFailed = "ログインに失敗しました";
 }

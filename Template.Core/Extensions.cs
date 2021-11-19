@@ -1,24 +1,23 @@
-namespace Template
+namespace Template;
+
+using System;
+
+public static class Extensions
 {
-    using System;
-
-    public static class Extensions
+    public static DateTime? NextDate(this DateTime? value)
     {
-        public static DateTime? NextDate(this DateTime? value)
+        if (value.HasValue)
         {
-            if (value.HasValue)
+            try
             {
-                try
-                {
-                    return value.Value.Date.AddDays(1);
-                }
-                catch (ArgumentOutOfRangeException)
-                {
-                    return DateTime.MaxValue;
-                }
+                return value.Value.Date.AddDays(1);
             }
-
-            return null;
+            catch (ArgumentOutOfRangeException)
+            {
+                return DateTime.MaxValue;
+            }
         }
+
+        return null;
     }
 }

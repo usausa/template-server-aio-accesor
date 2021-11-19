@@ -1,24 +1,23 @@
-namespace Template.Web.Areas.Example.Controllers
+namespace Template.Web.Areas.Example.Controllers;
+
+using System;
+using System.Threading.Tasks;
+
+using Microsoft.AspNetCore.Mvc;
+
+public class LogController : BaseExampleController
 {
-    using System;
-    using System.Threading.Tasks;
-
-    using Microsoft.AspNetCore.Mvc;
-
-    public class LogController : BaseExampleController
+    [HttpGet]
+    public async ValueTask<IActionResult> Slow()
     {
-        [HttpGet]
-        public async ValueTask<IActionResult> Slow()
-        {
-            await Task.Delay(10_000);
+        await Task.Delay(10_000);
 
-            return View();
-        }
+        return View();
+    }
 
-        [HttpGet]
-        public IActionResult Exception()
-        {
-            throw new InvalidOperationException("Cause exception.");
-        }
+    [HttpGet]
+    public IActionResult Exception()
+    {
+        throw new InvalidOperationException("Cause exception.");
     }
 }

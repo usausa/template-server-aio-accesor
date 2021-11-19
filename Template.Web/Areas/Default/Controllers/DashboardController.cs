@@ -1,18 +1,17 @@
-namespace Template.Web.Areas.Default.Controllers
+namespace Template.Web.Areas.Default.Controllers;
+
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+
+using Template.Web.Infrastructure.Mvc;
+
+public class DashboardController : BaseDefaultController
 {
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Mvc;
-
-    using Template.Web.Infrastructure.Mvc;
-
-    public class DashboardController : BaseDefaultController
+    [AllowAnonymous]
+    [DefaultRoute]
+    [HttpGet]
+    public IActionResult Index()
     {
-        [AllowAnonymous]
-        [DefaultRoute]
-        [HttpGet]
-        public IActionResult Index()
-        {
-            return View();
-        }
+        return View();
     }
 }

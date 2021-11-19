@@ -1,16 +1,15 @@
-namespace Template.Web.Settings
+namespace Template.Web.Settings;
+
+using System.Diagnostics.CodeAnalysis;
+
+public class ServerSetting
 {
-    using System.Diagnostics.CodeAnalysis;
+    [AllowNull]
+    public string ApiToken { get; set; }
 
-    public class ServerSetting
-    {
-        [AllowNull]
-        public string ApiToken { get; set; }
+    public int LongTimeThreshold { get; set; }
 
-        public int LongTimeThreshold { get; set; }
+    public string[]? AllowHealth { get; set; }
 
-        public string[]? AllowHealth { get; set; }
-
-        public string[]? AllowMetrics { get; set; }
-    }
+    public string[]? AllowMetrics { get; set; }
 }

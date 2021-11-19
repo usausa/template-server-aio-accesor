@@ -1,19 +1,18 @@
-namespace Template.Web.Areas.Example
+namespace Template.Web.Areas.Example;
+
+using AutoMapper;
+
+using Template;
+using Template.Services;
+using Template.Web.Areas.Example.Models;
+
+public class MappingProfile : Profile
 {
-    using AutoMapper;
-
-    using Template;
-    using Template.Services;
-    using Template.Web.Areas.Example.Models;
-
-    public class MappingProfile : Profile
+    public MappingProfile()
     {
-        public MappingProfile()
-        {
-            // Data
-            CreateMap<DataListForm, DataSearchParameter>()
-                .ForMember(d => d.Page, opt => opt.MapFrom(s => s.Page ?? 1))
-                .ForMember(d => d.DateTimeTo, opt => opt.MapFrom(s => s.DateTimeTo.NextDate()));
-        }
+        // Data
+        CreateMap<DataListForm, DataSearchParameter>()
+            .ForMember(d => d.Page, opt => opt.MapFrom(s => s.Page ?? 1))
+            .ForMember(d => d.DateTimeTo, opt => opt.MapFrom(s => s.DateTimeTo.NextDate()));
     }
 }

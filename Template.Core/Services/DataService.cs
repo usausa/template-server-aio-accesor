@@ -1,40 +1,39 @@
-namespace Template.Services
+namespace Template.Services;
+
+using System;
+using System.Threading.Tasks;
+
+using Template.Accessors;
+using Template.Models.Entity;
+using Template.Models.Paging;
+
+using Smart.Data.Accessor;
+
+public class DataSearchParameter : Pageable
 {
-    using System;
-    using System.Threading.Tasks;
+    public bool? Flag { get; set; }
 
-    using Template.Accessors;
-    using Template.Models.Entity;
-    using Template.Models.Paging;
+    public string? Name { get; set; }
 
-    using Smart.Data.Accessor;
+    public DateTime? DateTimeFrom { get; set; }
 
-    public class DataSearchParameter : Pageable
+    public DateTime? DateTimeTo { get; set; }
+}
+
+public class DataService
+{
+    private IDataAccessor DataAccessor { get; }
+
+    public DataService(
+        IAccessorResolver<IDataAccessor> dataAccessor)
     {
-        public bool? Flag { get; set; }
-
-        public string? Name { get; set; }
-
-        public DateTime? DateTimeFrom { get; set; }
-
-        public DateTime? DateTimeTo { get; set; }
+        DataAccessor = dataAccessor.Accessor;
     }
 
-    public class DataService
+    public async ValueTask<Paged<DataEntity>> QueryAccountPagedAsync(DataSearchParameter parameter)
     {
-        private IDataAccessor DataAccessor { get; }
-
-        public DataService(
-            IAccessorResolver<IDataAccessor> dataAccessor)
-        {
-            DataAccessor = dataAccessor.Accessor;
-        }
-
-        public async ValueTask<Paged<DataEntity>> QueryAccountPagedAsync(DataSearchParameter parameter)
-        {
-            var list = await DataAccessor.QueryDataListAsync(parameter.Flag, parameter.Size, parameter.Offset).ConfigureAwait(false);
-            var count = await DataAccessor.CountDataAsync(parameter.Flag).ConfigureAwait(false);
-            return new Paged<DataEntity>(parameter, list, count);
-        }
+        var list = await DataAccessor.QueryDataListAsync(parameter.Flag, parameter.Size, parameter.Offset).ConfigureAwait(false);
+        var count = await DataAccessor.CountDataAsync(parameter.Flag).ConfigureAwait(false);
+        return new Paged<DataEntity>(parameter, list, count);
     }
 }

@@ -1,18 +1,17 @@
-namespace Template.Models.Entity
+namespace Template.Models.Entity;
+
+using System.Diagnostics.CodeAnalysis;
+
+public class AccountEntity
 {
-    using System.Diagnostics.CodeAnalysis;
+    [AllowNull]
+    public string Id { get; set; }
 
-    public class AccountEntity
-    {
-        [AllowNull]
-        public string Id { get; set; }
+    [AllowNull]
+    public string Name { get; set; }
 
-        [AllowNull]
-        public string Name { get; set; }
+    [AllowNull]
+    public string PasswordHash { get; set; }
 
-        [AllowNull]
-        public string PasswordHash { get; set; }
-
-        public bool IsAdmin { get; set; }
-    }
+    public bool IsAdmin { get; set; }
 }

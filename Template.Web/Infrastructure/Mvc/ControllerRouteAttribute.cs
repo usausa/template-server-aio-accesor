@@ -1,12 +1,11 @@
-namespace Template.Web.Infrastructure.Mvc
-{
-    using Microsoft.AspNetCore.Mvc;
+namespace Template.Web.Infrastructure.Mvc;
 
-    public sealed class ControllerRouteAttribute : RouteAttribute
+using Microsoft.AspNetCore.Mvc;
+
+public sealed class ControllerRouteAttribute : RouteAttribute
+{
+    public ControllerRouteAttribute()
+        : base("~/[controller]")
     {
-        public ControllerRouteAttribute()
-            : base("~/[controller]")
-        {
-        }
     }
 }

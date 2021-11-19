@@ -1,12 +1,11 @@
-namespace Template.Web.Areas.Admin
-{
-    using AutoMapper;
+namespace Template.Web.Areas.Admin;
 
-    public class MappingProfile : Profile
-    {
-        // TODO
-        //public MappingProfile()
-        //{
-        //}
-    }
+using AutoMapper;
+
+public class MappingProfile : Profile
+{
+    // TODO
+    //public MappingProfile()
+    //{
+    //}
 }

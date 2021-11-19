@@ -1,20 +1,19 @@
-namespace Template.Web.Areas.Api.Models
+namespace Template.Web.Areas.Api.Models;
+
+using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
+
+public class ItemUpdateRequestEntry
 {
-    using System.ComponentModel.DataAnnotations;
-    using System.Diagnostics.CodeAnalysis;
+    [AllowNull]
+    public string Code { get; set; }
 
-    public class ItemUpdateRequestEntry
-    {
-        [AllowNull]
-        public string Code { get; set; }
+    public int Value { get; set; }
+}
 
-        public int Value { get; set; }
-    }
-
-    public class ItemUpdateRequest
-    {
-        [Required]
-        [AllowNull]
-        public ItemUpdateRequestEntry[] Entries { get; set; }
-    }
+public class ItemUpdateRequest
+{
+    [Required]
+    [AllowNull]
+    public ItemUpdateRequestEntry[] Entries { get; set; }
 }

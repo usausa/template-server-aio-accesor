@@ -1,46 +1,45 @@
-namespace Template.Web.Areas.Api.Controllers
+namespace Template.Web.Areas.Api.Controllers;
+
+using System.Linq;
+using System.Threading.Tasks;
+
+using AutoMapper;
+
+using Microsoft.AspNetCore.Mvc;
+
+using Template.Models.Entity;
+using Template.Services;
+using Template.Web.Areas.Api.Models;
+
+[System.Diagnostics.CodeAnalysis.SuppressMessage("Security", "CA5391", Justification = "API Controller")]
+public class ItemController : BaseApiController
 {
-    using System.Linq;
-    using System.Threading.Tasks;
+    private IMapper Mapper { get; }
 
-    using AutoMapper;
+    private ItemService ItemService { get; }
 
-    using Microsoft.AspNetCore.Mvc;
-
-    using Template.Models.Entity;
-    using Template.Services;
-    using Template.Web.Areas.Api.Models;
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Security", "CA5391", Justification = "API Controller")]
-    public class ItemController : BaseApiController
+    public ItemController(
+        IMapper mapper,
+        ItemService itemService)
     {
-        private IMapper Mapper { get; }
+        Mapper = mapper;
+        ItemService = itemService;
+    }
 
-        private ItemService ItemService { get; }
-
-        public ItemController(
-            IMapper mapper,
-            ItemService itemService)
+    [HttpGet("{category}")]
+    public async ValueTask<IActionResult> List([FromRoute] string category)
+    {
+        return Ok(new ItemListResponse
         {
-            Mapper = mapper;
-            ItemService = itemService;
-        }
+            Entries = (await ItemService.QueryItemListAsync(category)).ToArray()
+        });
+    }
 
-        [HttpGet("{category}")]
-        public async ValueTask<IActionResult> List([FromRoute] string category)
-        {
-            return Ok(new ItemListResponse
-            {
-                Entries = (await ItemService.QueryItemListAsync(category)).ToArray()
-            });
-        }
+    [HttpPost]
+    public async ValueTask<IActionResult> Update([FromBody] ItemUpdateRequest request)
+    {
+        await ItemService.UpdateItemList(request.Entries.Select(x => Mapper.Map<ItemEntity>(x)));
 
-        [HttpPost]
-        public async ValueTask<IActionResult> Update([FromBody] ItemUpdateRequest request)
-        {
-            await ItemService.UpdateItemList(request.Entries.Select(x => Mapper.Map<ItemEntity>(x)));
-
-            return Ok();
-        }
+        return Ok();
     }
 }

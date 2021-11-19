@@ -1,9 +1,8 @@
-namespace Template.Web.Areas.Api.Models
-{
-    using System;
+namespace Template.Web.Areas.Api.Models;
 
-    public class TerminalTimeResponse
-    {
-        public DateTime DateTime { get; set; }
-    }
+using System;
+
+public class TerminalTimeResponse
+{
+    public DateTime DateTime { get; set; }
 }

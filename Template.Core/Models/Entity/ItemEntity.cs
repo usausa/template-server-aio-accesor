@@ -1,18 +1,17 @@
-namespace Template.Models.Entity
+namespace Template.Models.Entity;
+
+using System.Diagnostics.CodeAnalysis;
+
+public class ItemEntity
 {
-    using System.Diagnostics.CodeAnalysis;
+    [AllowNull]
+    public string Code { get; set; }
 
-    public class ItemEntity
-    {
-        [AllowNull]
-        public string Code { get; set; }
+    [AllowNull]
+    public string Category { get; set; }
 
-        [AllowNull]
-        public string Category { get; set; }
+    [AllowNull]
+    public string Name { get; set; }
 
-        [AllowNull]
-        public string Name { get; set; }
-
-        public int Value { get; set; }
-    }
+    public int Value { get; set; }
 }

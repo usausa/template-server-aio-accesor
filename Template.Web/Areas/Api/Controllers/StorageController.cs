@@ -1,87 +1,86 @@
-namespace Template.Web.Areas.Api.Controllers
+namespace Template.Web.Areas.Api.Controllers;
+
+using System;
+using System.Threading.Tasks;
+
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+
+using Template.Components.Storage;
+using Template.Web.Infrastructure.Filters;
+
+using Template.Web.Infrastructure.Token;
+
+[System.Diagnostics.CodeAnalysis.SuppressMessage("Security", "CA5391", Justification = "API Controller")]
+[Area("api")]
+[Route("[area]/[controller]")]
+[ApiController]
+[TokenFilter]
+[ApiExplorerSettings(IgnoreApi = true)]
+public class StorageController : Controller
 {
-    using System;
-    using System.Threading.Tasks;
+    private const string ContextType = "application/octet-stream";
 
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Extensions.Logging;
+    private ILogger<StorageController> Log { get; }
 
-    using Template.Components.Storage;
-    using Template.Web.Infrastructure.Filters;
+    private IStorage Storage { get; }
 
-    using Template.Web.Infrastructure.Token;
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Security", "CA5391", Justification = "API Controller")]
-    [Area("api")]
-    [Route("[area]/[controller]")]
-    [ApiController]
-    [TokenFilter]
-    [ApiExplorerSettings(IgnoreApi = true)]
-    public class StorageController : Controller
+    public StorageController(
+        ILogger<StorageController> log,
+        IStorage storage)
     {
-        private const string ContextType = "application/octet-stream";
+        Log = log;
+        Storage = storage;
+    }
 
-        private ILogger<StorageController> Log { get; }
+    [HttpGet("{**path}")]
+    public async ValueTask<IActionResult> Get([FromRoute] string? path = "/")
+    {
+        Log.LogInformation("Get. path=[{Path}]", path);
 
-        private IStorage Storage { get; }
-
-        public StorageController(
-            ILogger<StorageController> log,
-            IStorage storage)
+        if (path!.EndsWith('/'))
         {
-            Log = log;
-            Storage = storage;
-        }
-
-        [HttpGet("{**path}")]
-        public async ValueTask<IActionResult> Get([FromRoute] string? path = "/")
-        {
-            Log.LogInformation("Get. path=[{Path}]", path);
-
-            if (path!.EndsWith('/'))
-            {
-                if (!await Storage.DirectoryExistsAsync(path))
-                {
-                    Log.LogWarning("Get not found. path=[{Path}]", path);
-
-                    return NotFound();
-                }
-
-                var files = await Storage.ListAsync(path);
-                return Ok(files);
-            }
-
-            if (!await Storage.FileExistsAsync(path))
+            if (!await Storage.DirectoryExistsAsync(path))
             {
                 Log.LogWarning("Get not found. path=[{Path}]", path);
 
                 return NotFound();
             }
 
-            var stream = await Storage.ReadAsync(path);
-            var index = path.LastIndexOf("/", StringComparison.OrdinalIgnoreCase);
-            return File(stream, ContextType, index >= 0 ? path[(index + 1)..] : path);
+            var files = await Storage.ListAsync(path);
+            return Ok(files);
         }
 
-        [HttpPost("{**path}")]
-        [ReadableBodyStream]
-        public async ValueTask<IActionResult> Post([FromRoute] string path)
+        if (!await Storage.FileExistsAsync(path))
         {
-            Log.LogInformation("Post. path=[{Path}]", path);
+            Log.LogWarning("Get not found. path=[{Path}]", path);
 
-            await Storage.WriteAsync(path, Request.Body);
-
-            return Ok();
+            return NotFound();
         }
 
-        [HttpDelete("{**path}")]
-        public async ValueTask<IActionResult> Delete([FromRoute] string path)
-        {
-            Log.LogInformation("Delete. path=[{Path}]", path);
+        var stream = await Storage.ReadAsync(path);
+        var index = path.LastIndexOf("/", StringComparison.OrdinalIgnoreCase);
+        return File(stream, ContextType, index >= 0 ? path[(index + 1)..] : path);
+    }
 
-            await Storage.DeleteAsync(path);
+    [HttpPost("{**path}")]
+    [ReadableBodyStream]
+    public async ValueTask<IActionResult> Post([FromRoute] string path)
+    {
+        Log.LogInformation("Post. path=[{Path}]", path);
 
-            return Ok();
-        }
+        await Storage.WriteAsync(path, Request.Body);
+
+        return Ok();
+    }
+
+    [HttpDelete("{**path}")]
+    public async ValueTask<IActionResult> Delete([FromRoute] string path)
+    {
+        Log.LogInformation("Delete. path=[{Path}]", path);
+
+        await Storage.DeleteAsync(path);
+
+        return Ok();
     }
 }

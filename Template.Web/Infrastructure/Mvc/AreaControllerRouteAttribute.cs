@@ -1,12 +1,11 @@
-namespace Template.Web.Infrastructure.Mvc
-{
-    using Microsoft.AspNetCore.Mvc;
+namespace Template.Web.Infrastructure.Mvc;
 
-    public sealed class AreaControllerRouteAttribute : RouteAttribute
+using Microsoft.AspNetCore.Mvc;
+
+public sealed class AreaControllerRouteAttribute : RouteAttribute
+{
+    public AreaControllerRouteAttribute()
+        : base("~/[area]/[controller]")
     {
-        public AreaControllerRouteAttribute()
-            : base("~/[area]/[controller]")
-        {
-        }
     }
 }

@@ -1,6 +1,5 @@
-namespace Template.Web.Infrastructure.ViewHelpers
+namespace Template.Web.Infrastructure.ViewHelpers;
+
+public class SelectListBuilder
 {
-    public class SelectListBuilder
-    {
-    }
 }

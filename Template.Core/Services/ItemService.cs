@@ -1,42 +1,41 @@
-namespace Template.Services
+namespace Template.Services;
+
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+using Smart.Data;
+using Smart.Data.Accessor;
+
+using Template.Accessors;
+using Template.Models.Entity;
+
+public class ItemService
 {
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
+    private IDbProvider DbProvider { get; }
 
-    using Smart.Data;
-    using Smart.Data.Accessor;
+    private IItemAccessor ItemAccessor { get; }
 
-    using Template.Accessors;
-    using Template.Models.Entity;
-
-    public class ItemService
+    public ItemService(
+        IDbProvider dbProvider,
+        IAccessorResolver<IItemAccessor> dataAccessor)
     {
-        private IDbProvider DbProvider { get; }
+        DbProvider = dbProvider;
+        ItemAccessor = dataAccessor.Accessor;
+    }
 
-        private IItemAccessor ItemAccessor { get; }
+    public ValueTask<List<ItemEntity>> QueryItemListAsync(string category) =>
+        ItemAccessor.QueryItemListAsync(category);
 
-        public ItemService(
-            IDbProvider dbProvider,
-            IAccessorResolver<IItemAccessor> dataAccessor)
+    public async ValueTask UpdateItemList(IEnumerable<ItemEntity> entities)
+    {
+        await DbProvider.UsingTxAsync(async (_, tx) =>
         {
-            DbProvider = dbProvider;
-            ItemAccessor = dataAccessor.Accessor;
-        }
-
-        public ValueTask<List<ItemEntity>> QueryItemListAsync(string category) =>
-            ItemAccessor.QueryItemListAsync(category);
-
-        public async ValueTask UpdateItemList(IEnumerable<ItemEntity> entities)
-        {
-            await DbProvider.UsingTxAsync(async (_, tx) =>
+            foreach (var entity in entities)
             {
-                foreach (var entity in entities)
-                {
-                    await ItemAccessor.UpdateItem(tx, entity).ConfigureAwait(false);
-                }
+                await ItemAccessor.UpdateItem(tx, entity).ConfigureAwait(false);
+            }
 
-                await tx.CommitAsync().ConfigureAwait(false);
-            }).ConfigureAwait(false);
-        }
+            await tx.CommitAsync().ConfigureAwait(false);
+        }).ConfigureAwait(false);
     }
 }

@@ -1,7 +1,6 @@
-namespace Template.Web.Infrastructure.ViewHelpers
+namespace Template.Web.Infrastructure.ViewHelpers;
+
+public static class ViewHelper
 {
-    public static class ViewHelper
-    {
-        public static string Status(bool value) => value ? "○" : "×";
-    }
+    public static string Status(bool value) => value ? "○" : "×";
 }

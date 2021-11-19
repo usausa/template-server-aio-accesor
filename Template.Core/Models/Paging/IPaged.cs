@@ -1,13 +1,12 @@
-namespace Template.Models.Paging
+namespace Template.Models.Paging;
+
+public interface IPaged
 {
-    public interface IPaged
-    {
-        int Page { get; }
+    int Page { get; }
 
-        bool HasPrev { get; }
+    bool HasPrev { get; }
 
-        bool HasNext { get; }
+    bool HasNext { get; }
 
-        int TotalPage { get; }
-    }
+    int TotalPage { get; }
 }

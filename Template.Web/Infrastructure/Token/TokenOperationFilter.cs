@@ -1,36 +1,35 @@
-namespace Template.Web.Infrastructure.Token
+namespace Template.Web.Infrastructure.Token;
+
+using System.Collections.Generic;
+
+using Microsoft.OpenApi.Any;
+using Microsoft.OpenApi.Models;
+
+using Swashbuckle.AspNetCore.SwaggerGen;
+
+public sealed class TokenOperationFilter : IOperationFilter
 {
-    using System.Collections.Generic;
+    private readonly string token;
 
-    using Microsoft.OpenApi.Any;
-    using Microsoft.OpenApi.Models;
-
-    using Swashbuckle.AspNetCore.SwaggerGen;
-
-    public sealed class TokenOperationFilter : IOperationFilter
+    public TokenOperationFilter(string token)
     {
-        private readonly string token;
+        this.token = token;
+    }
 
-        public TokenOperationFilter(string token)
+    public void Apply(OpenApiOperation operation, OperationFilterContext context)
+    {
+        operation.Parameters ??= new List<OpenApiParameter>();
+
+        operation.Parameters.Add(new OpenApiParameter
         {
-            this.token = token;
-        }
-
-        public void Apply(OpenApiOperation operation, OperationFilterContext context)
-        {
-            operation.Parameters ??= new List<OpenApiParameter>();
-
-            operation.Parameters.Add(new OpenApiParameter
+            Name = "Token",
+            In = ParameterLocation.Header,
+            Required = true,
+            Schema = new OpenApiSchema
             {
-                Name = "Token",
-                In = ParameterLocation.Header,
-                Required = true,
-                Schema = new OpenApiSchema
-                {
-                    Type = "string",
-                    Default = new OpenApiString(token)
-                }
-            });
-        }
+                Type = "string",
+                Default = new OpenApiString(token)
+            }
+        });
     }
 }

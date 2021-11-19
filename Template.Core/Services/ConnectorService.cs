@@ -1,38 +1,37 @@
-namespace Template.Services
+namespace Template.Services;
+
+using System.Net.Http;
+using System.Threading.Tasks;
+
+using Microsoft.Extensions.Logging;
+
+using Rester;
+
+using Template.Models.Connector;
+
+public class ConnectorService
 {
-    using System.Net.Http;
-    using System.Threading.Tasks;
+    private ILogger<ConnectorService> Log { get; }
 
-    using Microsoft.Extensions.Logging;
+    private IHttpClientFactory HttpClientFactory { get; }
 
-    using Rester;
-
-    using Template.Models.Connector;
-
-    public class ConnectorService
+    public ConnectorService(
+        ILogger<ConnectorService> log,
+        IHttpClientFactory httpClientFactory)
     {
-        private ILogger<ConnectorService> Log { get; }
+        Log = log;
+        HttpClientFactory = httpClientFactory;
+    }
 
-        private IHttpClientFactory HttpClientFactory { get; }
-
-        public ConnectorService(
-            ILogger<ConnectorService> log,
-            IHttpClientFactory httpClientFactory)
+    public async ValueTask<SampleResponse?> GetSampleAsync()
+    {
+        using var client = HttpClientFactory.CreateClient(ConnectorNames.Sample);
+        var result = await client.GetAsync<SampleResponse>("?format=json").ConfigureAwait(false);
+        if (result.Content is null)
         {
-            Log = log;
-            HttpClientFactory = httpClientFactory;
+            Log.LogWarning("Sample get failed. result=[{RestResult}], statusCode=[{StatusCode}]", result.RestResult, result.StatusCode);
         }
 
-        public async ValueTask<SampleResponse?> GetSampleAsync()
-        {
-            using var client = HttpClientFactory.CreateClient(ConnectorNames.Sample);
-            var result = await client.GetAsync<SampleResponse>("?format=json").ConfigureAwait(false);
-            if (result.Content is null)
-            {
-                Log.LogWarning("Sample get failed. result=[{RestResult}], statusCode=[{StatusCode}]", result.RestResult, result.StatusCode);
-            }
-
-            return result.Content;
-        }
+        return result.Content;
     }
 }
