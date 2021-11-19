@@ -29,7 +29,7 @@ namespace Template.Services
             var result = await client.GetAsync<SampleResponse>("?format=json").ConfigureAwait(false);
             if (result.Content is null)
             {
-                Log.LogWarning("Sample get failed. result=[{restResult}], statusCode=[{statusCode}]", result.RestResult, result.StatusCode);
+                Log.LogWarning("Sample get failed. result=[{RestResult}], statusCode=[{StatusCode}]", result.RestResult, result.StatusCode);
             }
 
             return result.Content;

@@ -27,7 +27,7 @@ namespace Template.Web.Infrastructure.TagHelpers
 
             var builder = new StringBuilder();
             builder.Append("<div class=\"alert alert-success\" role=\"alert\">");
-            builder.Append(((string)message).Replace("\n", "<br />", StringComparison.InvariantCulture));
+            builder.Append(((string)message!).Replace("\n", "<br />", StringComparison.InvariantCulture));
             builder.Append("<a href=\"#\" class=\"close\" data-dismiss=\"alert\"><span>&times;</span></a>");
             builder.Append("</div>");
             output.Content.SetHtmlContent(builder.ToString());

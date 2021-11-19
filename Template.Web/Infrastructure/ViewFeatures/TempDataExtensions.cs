@@ -9,6 +9,6 @@ namespace Template.Web.Infrastructure.ViewFeatures
             tempData["Message"] = message;
         }
 
-        public static string GetMessage(this ITempDataDictionary tempData) => (string)tempData["Message"];
+        public static string GetMessage(this ITempDataDictionary tempData) => (string)tempData["Message"]!;
     }
 }

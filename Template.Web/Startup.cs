@@ -8,6 +8,7 @@ namespace Template.Web
     using System.Linq;
     using System.Text;
     using System.Text.Encodings.Web;
+    using System.Text.Json.Serialization;
     using System.Text.Unicode;
 
     using AspNetCoreComponents.IpFilter;
@@ -137,7 +138,7 @@ namespace Template.Web
 #endif
                 .AddJsonOptions(options =>
                 {
-                    options.JsonSerializerOptions.IgnoreNullValues = true;
+                    options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
                     options.JsonSerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
                     options.JsonSerializerOptions.Converters.Add(new DateTimeConverter());
                 });
@@ -213,7 +214,7 @@ namespace Template.Web
             {
                 config.Converters.Add(new DateTimeConverter());
                 config.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
-                config.IgnoreNullValues = true;
+                config.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
             });
 
             // Database

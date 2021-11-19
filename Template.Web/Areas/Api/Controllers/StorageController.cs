@@ -36,13 +36,13 @@ namespace Template.Web.Areas.Api.Controllers
         [HttpGet("{**path}")]
         public async ValueTask<IActionResult> Get([FromRoute] string? path = "/")
         {
-            Log.LogInformation($"Get. path=[{path}]");
+            Log.LogInformation("Get. path=[{Path}]", path);
 
             if (path!.EndsWith('/'))
             {
                 if (!await Storage.DirectoryExistsAsync(path))
                 {
-                    Log.LogWarning($"Get not found. path=[{path}]");
+                    Log.LogWarning("Get not found. path=[{Path}]", path);
 
                     return NotFound();
                 }
@@ -53,7 +53,7 @@ namespace Template.Web.Areas.Api.Controllers
 
             if (!await Storage.FileExistsAsync(path))
             {
-                Log.LogWarning("Get not found. path=[{path}]", path);
+                Log.LogWarning("Get not found. path=[{Path}]", path);
 
                 return NotFound();
             }
@@ -67,7 +67,7 @@ namespace Template.Web.Areas.Api.Controllers
         [ReadableBodyStream]
         public async ValueTask<IActionResult> Post([FromRoute] string path)
         {
-            Log.LogInformation("Post. path=[{path}]", path);
+            Log.LogInformation("Post. path=[{Path}]", path);
 
             await Storage.WriteAsync(path, Request.Body);
 
@@ -77,7 +77,7 @@ namespace Template.Web.Areas.Api.Controllers
         [HttpDelete("{**path}")]
         public async ValueTask<IActionResult> Delete([FromRoute] string path)
         {
-            Log.LogInformation("Delete. path=[{path}]", path);
+            Log.LogInformation("Delete. path=[{Path}]", path);
 
             await Storage.DeleteAsync(path);
 

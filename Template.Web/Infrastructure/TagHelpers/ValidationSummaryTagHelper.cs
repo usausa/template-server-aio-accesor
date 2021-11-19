@@ -30,7 +30,7 @@ namespace Template.Web.Infrastructure.TagHelpers
 
             var builder = new StringBuilder();
             builder.AppendLine("<ul class=\"error-list\">");
-            foreach (var error in ViewContext.ViewData.ModelState.SelectMany(x => x.Value.Errors))
+            foreach (var error in ViewContext.ViewData.ModelState.SelectMany(x => x.Value!.Errors))
             {
                 builder.AppendLine(
                     "<li class=\"error-list-item\">" +

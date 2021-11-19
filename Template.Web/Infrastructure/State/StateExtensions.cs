@@ -7,7 +7,7 @@ namespace Template.Web.Infrastructure.State
 
     public static class StateExtensions
     {
-        public static string RestoreState(this IUrlHelper urlHelper, string action)
+        public static string? RestoreState(this IUrlHelper urlHelper, string action)
         {
             var state = urlHelper.ActionContext.HttpContext.Request.Query["state"];
             if (String.IsNullOrEmpty(state))

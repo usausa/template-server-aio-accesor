@@ -84,7 +84,9 @@ namespace Template.Components.Storage
             path = NormalizePath(path);
             Directory.CreateDirectory(Path.GetDirectoryName(path)!);
 
+#pragma warning disable CA2007
             await using var fs = File.OpenWrite(path);
+#pragma warning restore CA2007
             await stream.CopyToAsync(fs, CopyBufferSize, cancellationToken).ConfigureAwait(false);
         }
     }
