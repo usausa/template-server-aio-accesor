@@ -1,5 +1,3 @@
-using System;
-
 [assembly: CLSCompliant(false)]
 
 // ReSharper disable CheckNamespace
