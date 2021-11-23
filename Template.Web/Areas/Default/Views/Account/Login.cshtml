@@ -4,28 +4,28 @@
     ViewData.SetTitle("ログイン");
 }
 
-<div class="row justify-content-center">
+<div class="d-flex justify-content-center">
     <div class="card">
         <div class="card-header">
             <h4 class="mb-0">ログイン</h4>
         </div>
         <div class="card-body">
             <form method="post" asp-antiforgery="true">
-                <div class="form-group row">
+                <div class="row mb-3">
                     <label asp-for="Id" class="col-form-label col-md-4">ID</label>
                     <div class="col-md-8">
                         <input type="text" asp-for="Id" class="form-control" maxlength="@Length.AccountId"/>
                         <span asp-validation-for="Id" class="text-danger"></span>
                     </div>
                 </div>
-                <div class="form-group row">
+                <div class="row mb-3">
                     <label asp-for="Password" class="col-form-label col-md-4">パスワード</label>
                     <div class="col-md-8">
                         <input type="password" asp-for="Password" class="form-control"/>
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
                 </div>
-                <div class="form-group row mb-0">
+                <div class="row mb-0">
                     <div class="col-md-12 text-center">
                         <button type="submit" class="btn btn-primary">
                             <i class="fas fa-sign-in-alt"></i> ログイン

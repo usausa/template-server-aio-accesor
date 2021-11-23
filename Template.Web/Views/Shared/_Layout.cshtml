@@ -8,14 +8,12 @@
 <environment include="Development">
     <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="~/lib/font-awesome/css/all.css" />
-    <link rel="stylesheet" href="~/lib/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.css">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/metro-colors2.css" asp-append-version="true" />
 </environment>
 <environment exclude="Development">
     <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
-    <link rel="stylesheet" href="~/lib/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
     <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/metro-colors2.min.css" asp-append-version="true" />
 </environment>
@@ -24,49 +22,51 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-light bg-light border-bottom box-shadow mb-3">
-            <a class="navbar-brand" asp-area="Default" asp-controller="Dashboard" asp-action="Index">テンプレート</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item" active-if="@ViewContext.IsActionActive("Default", "", "")">
-                        <a class="nav-link" href="#"><i class="fas fa-project-diagram"></i> ○○機能</a>
-                    </li>
-                    <li class="nav-item dropdown" active-if="@ViewContext.IsControllerActive("Default", new[] { "" })">
-                        <a href="#" class="nav-link dropdown-toggle" toggle="dropdown" role="button" data-toggle="dropdown"><i class="fas fa-edit"></i> ○○機能</a>
-                        <div class="dropdown-menu" role="menu">
-                            <a class="dropdown-item" active-if="@ViewContext.IsControllerActive("Default", "")" href="#"><i class="fas fa-chart-line"></i> ○○機能</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" active-if="@ViewContext.IsControllerActive("Default", "")" href="#"><i class="fas fa-calendar-alt"></i> ○○機能</a>
-                        </div>
-                    </li>
-                    <li if="User.IsAdmin()" class="nav-item dropdown" active-if="@ViewContext.IsAreaActive("Admin")">
-                        <a href="#" class="nav-link dropdown-toggle" toggle="dropdown" role="button" data-toggle="dropdown"><i class="fas fa-tools"></i> 管理機能</a>
-                        <div class="dropdown-menu" role="menu">
-                            <a class="dropdown-item" href="#" active-if="@ViewContext.IsControllerActive("Admin", "")"><i class="fas fa-print"></i> ○○管理</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#" active-if="@ViewContext.IsControllerActive("Admin", "")"><i class="fas fa-clock"></i> ○○管理</a>
-                        </div>
-                    </li>
-                </ul>
-                <ul class="navbar-nav">
-                    <li if="!User.IsAuthenticated()" class="nav-item">
-                        <a class="nav-link" asp-area="Default" asp-controller="Account" asp-action="Login"><i class="fas fa-sign-in-alt"></i> ログイン</a>
-                    </li>
-                    <li if="User.IsAuthenticated()" class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" toggle="dropdown" role="button" data-toggle="dropdown"><i class="fas fa-user-alt"></i> @User.Identity!.Name</a>
-                        <div class="dropdown-menu dropdown-menu-right" role="menu">
-                            <a class="dropdown-item" asp-area="Default" asp-controller="Account" asp-action="Logout"><i class="fas fa-sign-out-alt"></i> ログアウト</a>
-                        </div>
-                    </li>
-                </ul>
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="default" asp-controller="Dashboard" asp-action="Index">テンプレート</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item" active-if="@ViewContext.IsActionActive("Default", "", "")">
+                            <a class="nav-link" href="#"><i class="fas fa-project-diagram"></i> ○○機能</a>
+                        </li>
+                        <li class="nav-item dropdown" active-if="@ViewContext.IsControllerActive("Default", new[] { "" })">
+                            <a href="#" class="nav-link dropdown-toggle" toggle="dropdown" role="button" data-toggle="dropdown"><i class="fas fa-edit"></i> ○○機能</a>
+                            <div class="dropdown-menu" role="menu">
+                                <a class="dropdown-item" active-if="@ViewContext.IsControllerActive("Default", "")" href="#"><i class="fas fa-chart-line"></i> ○○機能</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" active-if="@ViewContext.IsControllerActive("Default", "")" href="#"><i class="fas fa-calendar-alt"></i> ○○機能</a>
+                            </div>
+                        </li>
+                        <li if="User.IsAdmin()" class="nav-item dropdown" active-if="@ViewContext.IsAreaActive("Admin")">
+                            <a href="#" class="nav-link dropdown-toggle" toggle="dropdown" role="button" data-toggle="dropdown"><i class="fas fa-tools"></i> 管理機能</a>
+                            <div class="dropdown-menu" role="menu">
+                                <a class="dropdown-item" href="#" active-if="@ViewContext.IsControllerActive("Admin", "")"><i class="fas fa-print"></i> ○○管理</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" active-if="@ViewContext.IsControllerActive("Admin", "")"><i class="fas fa-clock"></i> ○○管理</a>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li if="!User.IsAuthenticated()" class="nav-item">
+                            <a class="nav-link" asp-area="default" asp-controller="Account" asp-action="Login"><i class="fas fa-sign-in-alt"></i> ログイン</a>
+                        </li>
+                        <li if="User.IsAuthenticated()" class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" toggle="dropdown" role="button" data-toggle="dropdown"><i class="fas fa-user-alt"></i> @User.Identity!.Name</a>
+                            <div class="dropdown-menu dropdown-menu-end" role="menu">
+                                <a class="dropdown-item" asp-area="default" asp-controller="Account" asp-action="Logout"><i class="fas fa-sign-out-alt"></i> ログアウト</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </nav>
     </header>
     <div class="container-fluid">
-        <main role="main" class="pb-3">
+        <main role="main">
             @RenderBody()
         </main>
     </div>
@@ -76,23 +76,21 @@
             &copy; 2021 - テンプレート
         </div>
     </footer>
-    <environment include="Development">
-        <script src="~/lib/jquery/jquery.js"></script>
-        <script src="~/lib/bootstrap/js/bootstrap.bundle.js"></script>
-        <script src="~/lib/moment.js/moment-with-locales.js"></script>
-        <script src="~/lib/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="~/lib/jquery/jquery.min.js"></script>
-        <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="~/lib/moment.js/moment-with-locales.min.js"></script>
-        <script src="~/lib/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
-    </environment>
-    @await RenderSectionAsync("Scripts", required: false)
-    <environment exclude="Production">
-        <mini-profiler position="@RenderPosition.Right" max-traces="5" />
-    </environment>
+<environment include="Development">
+    <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="~/lib/moment/moment-with-locales.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/moment/moment-with-locales.min.js"></script>
+    <script src="~/js/site.min.js" asp-append-version="true"></script>
+</environment>
+@await RenderSectionAsync("Scripts", required: false)
+<environment exclude="Production">
+    <mini-profiler position="@RenderPosition.Right" max-traces="5" />
+</environment>
 </body>
 </html>
