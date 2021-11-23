@@ -7,7 +7,7 @@
 <table class="table table-sm table-striped table-bordered mb-1">
     <thead>
     <tr>
-        <th class="text-right">ID</th>
+        <th class="text-end">ID</th>
         <th>名前</th>
         <th class="text-center">フラグ</th>
         <th>日時</th>
@@ -17,7 +17,7 @@
     @foreach (var entry in paged.EmptyIfNull())
     {
         <tr>
-            <td class="text-right">@entry.Id</td>
+            <td class="text-end">@entry.Id</td>
             <td>@entry.Name</td>
             <td class="text-center">@entry.Flag</td>
             <td>@entry.DateTime.DateTime()</td>
