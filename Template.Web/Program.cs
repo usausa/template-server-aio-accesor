@@ -323,3 +323,8 @@ app.MapControllers();
 app.MapMetrics();
 
 app.Run();
+
+// For test
+public partial class Program
+{
+}
