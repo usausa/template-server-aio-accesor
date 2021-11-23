@@ -322,9 +322,11 @@ app.MapControllers();
 // TODO SignalR
 app.MapMetrics();
 
+// Run
 app.Run();
 
 // For test
+#pragma warning disable CA1050
 public partial class Program
 {
 }
