@@ -8,10 +8,9 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Xunit;
 
 // TODO ref https://docs.microsoft.com/ja-jp/aspnet/core/test/integration-tests
-public class DashboardUsecaseTest : IClassFixture<DashboardUsecaseTest.CustomWebApplicationFactory<Template.Web.Startup>>
+public class DashboardUsecaseTest
 {
-    public class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<TStartup>
-        where TStartup : class
+    internal class CustomWebApplicationFactory : WebApplicationFactory<Program>
     {
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
@@ -23,18 +22,13 @@ public class DashboardUsecaseTest : IClassFixture<DashboardUsecaseTest.CustomWeb
         }
     }
 
-    private readonly CustomWebApplicationFactory<Template.Web.Startup> factory;
-
-    public DashboardUsecaseTest(CustomWebApplicationFactory<Template.Web.Startup> factory)
-    {
-        this.factory = factory;
-    }
-
     [Fact(DisplayName = "Dashboard display")]
     public async Task DisplayDashboard()
     {
+        await using var application = new CustomWebApplicationFactory();
+
         // Arrange
-        var client = factory.CreateClient();
+        var client = application.CreateClient();
 
         // Act
         var response = await client.GetAsync("/");
