@@ -226,7 +226,7 @@ builder.Services.AddSingleton<IPasswordProvider, SaltHashPasswordProvider>();
 
 // Storage
 builder.Services.Configure<FileStorageOptions>(builder.Configuration.GetSection("Storage"));
-builder.Services.AddSingleton(p => p.GetService<IOptions<FileStorageOptions>>()!.Value);
+builder.Services.AddSingleton(p => p.GetRequiredService<IOptions<FileStorageOptions>>().Value);
 builder.Services.AddSingleton<IStorage, FileStorage>();
 
 // Service
