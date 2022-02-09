@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 
 using Template.Components.Security;
-using Template.Services;
 
 public class AccountManager
 {

@@ -1,7 +1,6 @@
 namespace Template.Web.Areas.Admin;
 
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 
 [Area("admin")]
 [Route("[area]/[controller]/[action]")]

@@ -1,7 +1,5 @@
 namespace Template.Web.Areas.Api;
 
-using Microsoft.AspNetCore.Mvc;
-
 using Template.Web.Infrastructure.Token;
 
 [Area("api")]

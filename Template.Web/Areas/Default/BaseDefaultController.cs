@@ -1,7 +1,6 @@
 namespace Template.Web.Areas.Default;
 
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 
 [Area("default")]
 [Route("[controller]/[action]")]

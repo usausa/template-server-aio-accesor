@@ -6,8 +6,6 @@ using System.Text.Unicode;
 
 using AspNetCoreComponents.IpFilter;
 
-using AutoMapper;
-
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -38,7 +36,6 @@ using Template.Components.Json;
 using Template.Components.Report;
 using Template.Components.Security;
 using Template.Components.Storage;
-using Template.Services;
 using Template.Web.Authentication;
 using Template.Web.Infrastructure.Token;
 using Template.Web.Settings;

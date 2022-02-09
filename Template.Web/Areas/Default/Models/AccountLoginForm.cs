@@ -1,7 +1,5 @@
 namespace Template.Web.Areas.Default.Models;
 
-using System.ComponentModel.DataAnnotations;
-
 public class AccountLoginForm
 {
     [Required(ErrorMessage = Messages.Required)]

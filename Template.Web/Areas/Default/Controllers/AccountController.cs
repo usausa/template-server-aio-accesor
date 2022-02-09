@@ -3,7 +3,6 @@ namespace Template.Web.Areas.Default.Controllers;
 using System;
 
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 
 using Template.Web.Areas.Default.Models;
 using Template.Web.Authentication;

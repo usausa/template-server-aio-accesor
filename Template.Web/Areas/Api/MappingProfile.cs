@@ -1,7 +1,5 @@
 namespace Template.Web.Areas.Api;
 
-using AutoMapper;
-
 using Template.Web.Areas.Api.Models;
 
 public class MappingProfile : Profile

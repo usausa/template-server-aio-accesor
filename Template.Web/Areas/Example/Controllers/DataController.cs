@@ -1,10 +1,5 @@
 namespace Template.Web.Areas.Example.Controllers;
 
-using AutoMapper;
-
-using Microsoft.AspNetCore.Mvc;
-
-using Template.Services;
 using Template.Web.Areas.Example.Models;
 
 public class DataController : BaseExampleController

@@ -1,7 +1,6 @@
 namespace Template.Web.Areas.Example.Models;
 
 using System;
-using System.ComponentModel.DataAnnotations;
 
 public class DataListForm
 {

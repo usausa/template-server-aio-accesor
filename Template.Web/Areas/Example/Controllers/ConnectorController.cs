@@ -1,8 +1,5 @@
 namespace Template.Web.Areas.Example.Controllers;
 
-using Microsoft.AspNetCore.Mvc;
-
-using Template.Services;
 using Template.Web.Infrastructure.Mvc;
 
 public class ConnectorController : BaseExampleController

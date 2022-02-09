@@ -2,8 +2,6 @@ namespace Template.Web.Areas.Example.Controllers;
 
 using System;
 
-using Microsoft.AspNetCore.Mvc;
-
 public class LogController : BaseExampleController
 {
     [HttpGet]

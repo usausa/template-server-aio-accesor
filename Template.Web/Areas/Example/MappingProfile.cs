@@ -1,9 +1,5 @@
 namespace Template.Web.Areas.Example;
 
-using AutoMapper;
-
-using Template;
-using Template.Services;
 using Template.Web.Areas.Example.Models;
 
 public class MappingProfile : Profile

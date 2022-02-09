@@ -3,7 +3,6 @@ namespace Template.Web.Infrastructure.State;
 using System;
 
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 
 public static class StateExtensions
 {

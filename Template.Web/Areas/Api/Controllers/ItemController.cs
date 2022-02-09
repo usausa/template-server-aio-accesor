@@ -2,11 +2,6 @@ namespace Template.Web.Areas.Api.Controllers;
 
 using System.Linq;
 
-using AutoMapper;
-
-using Microsoft.AspNetCore.Mvc;
-
-using Template.Services;
 using Template.Web.Areas.Api.Models;
 
 [System.Diagnostics.CodeAnalysis.SuppressMessage("Security", "CA5391", Justification = "API Controller")]
