@@ -2,8 +2,6 @@ namespace Template.Web.Infrastructure.State;
 
 using System;
 
-using Microsoft.AspNetCore.Http;
-
 public static class StateExtensions
 {
     public static string? RestoreState(this IUrlHelper urlHelper, string action)

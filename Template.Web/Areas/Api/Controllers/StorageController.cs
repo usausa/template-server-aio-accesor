@@ -3,9 +3,6 @@ namespace Template.Web.Areas.Api.Controllers;
 using System;
 
 using Template.Components.Storage;
-using Template.Web.Infrastructure.Filters;
-
-using Template.Web.Infrastructure.Token;
 
 [System.Diagnostics.CodeAnalysis.SuppressMessage("Security", "CA5391", Justification = "API Controller")]
 [Area("api")]

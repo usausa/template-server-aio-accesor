@@ -1,7 +1,5 @@
 namespace Template.Web.Areas.Admin.Controllers;
 
-using Template.Web.Infrastructure.Mvc;
-
 public class MenuController : BaseAdminController
 {
     [AreaControllerRoute]

@@ -2,8 +2,6 @@ namespace Template.Web.Areas.Default.Controllers;
 
 using System.Diagnostics;
 
-using Microsoft.AspNetCore.Authorization;
-
 using Template.Web.Areas.Default.Models;
 
 [AllowAnonymous]

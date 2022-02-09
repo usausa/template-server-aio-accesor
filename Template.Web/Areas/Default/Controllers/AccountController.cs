@@ -2,10 +2,7 @@ namespace Template.Web.Areas.Default.Controllers;
 
 using System;
 
-using Microsoft.AspNetCore.Authorization;
-
 using Template.Web.Areas.Default.Models;
-using Template.Web.Authentication;
 
 [AllowAnonymous]
 public class AccountController : BaseDefaultController

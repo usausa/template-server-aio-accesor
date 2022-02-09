@@ -36,9 +36,6 @@ using Template.Components.Json;
 using Template.Components.Report;
 using Template.Components.Security;
 using Template.Components.Storage;
-using Template.Web.Authentication;
-using Template.Web.Infrastructure.Token;
-using Template.Web.Settings;
 
 #pragma warning disable CA1812
 

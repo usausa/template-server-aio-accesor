@@ -1,7 +1,5 @@
 namespace Template.Web.Areas.Example.Controllers;
 
-using Template.Web.Infrastructure.Mvc;
-
 public class ConnectorController : BaseExampleController
 {
     private ConnectorService ConnectorService { get; }

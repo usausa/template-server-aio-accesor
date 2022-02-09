@@ -2,7 +2,6 @@ namespace Template.Web.Infrastructure.Filters;
 
 using System;
 
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Filters;
 
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]

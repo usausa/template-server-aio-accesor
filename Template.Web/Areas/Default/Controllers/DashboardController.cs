@@ -1,9 +1,5 @@
 namespace Template.Web.Areas.Default.Controllers;
 
-using Microsoft.AspNetCore.Authorization;
-
-using Template.Web.Infrastructure.Mvc;
-
 public class DashboardController : BaseDefaultController
 {
     [AllowAnonymous]
