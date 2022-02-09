@@ -1,7 +1,5 @@
 namespace Template.Web.Areas.Default.Models;
 
-using System;
-
 public class ErrorViewModel
 {
     public int StatusCode { get; set; }

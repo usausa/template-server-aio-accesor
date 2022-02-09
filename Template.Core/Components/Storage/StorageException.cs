@@ -1,7 +1,5 @@
 namespace Template.Components.Storage;
 
-using System;
-
 public sealed class StorageException : Exception
 {
     public StorageException()

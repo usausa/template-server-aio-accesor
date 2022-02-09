@@ -1,7 +1,5 @@
 namespace Template.Components.Report;
 
-using System;
-
 using PdfSharpCore.Drawing;
 
 public static class Fonts

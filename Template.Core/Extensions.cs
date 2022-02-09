@@ -1,7 +1,5 @@
 namespace Template;
 
-using System;
-
 public static class Extensions
 {
     public static DateTime? NextDate(this DateTime? value)

@@ -1,6 +1,5 @@
 namespace Template.Web.Infrastructure.State;
 
-using System;
 using System.Text;
 
 public static class StateHelper

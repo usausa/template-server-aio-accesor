@@ -1,7 +1,5 @@
 namespace Template.Web.Areas.Api.Controllers;
 
-using System;
-
 using Template.Components.Storage;
 
 [System.Diagnostics.CodeAnalysis.SuppressMessage("Security", "CA5391", Justification = "API Controller")]

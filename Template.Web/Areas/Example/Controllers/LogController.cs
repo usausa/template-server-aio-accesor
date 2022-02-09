@@ -1,7 +1,5 @@
 namespace Template.Web.Areas.Example.Controllers;
 
-using System;
-
 public class LogController : BaseExampleController
 {
     [HttpGet]

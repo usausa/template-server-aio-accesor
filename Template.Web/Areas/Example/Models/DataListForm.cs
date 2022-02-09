@@ -1,7 +1,5 @@
 namespace Template.Web.Areas.Example.Models;
 
-using System;
-
 public class DataListForm
 {
     [Range(1, Int32.MaxValue)]

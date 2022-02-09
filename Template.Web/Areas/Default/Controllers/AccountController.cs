@@ -1,7 +1,5 @@
 namespace Template.Web.Areas.Default.Controllers;
 
-using System;
-
 using Template.Web.Areas.Default.Models;
 
 [AllowAnonymous]

@@ -1,7 +1,5 @@
 namespace Template.Web.Infrastructure.ViewHelpers;
 
-using System;
-
 public static class ViewExtensions
 {
     //--------------------------------------------------------------------------------

@@ -1,7 +1,5 @@
 namespace Template.Services;
 
-using System;
-
 using Template.Accessors;
 
 public class DataSearchParameter : Pageable

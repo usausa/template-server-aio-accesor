@@ -1,8 +1,5 @@
 namespace Template.Models.Paging;
 
-using System;
-using System.Collections;
-
 public class Paged<T> : IPaged, IPageOver, IEnumerable<T>
 {
     private readonly IList<T> items;

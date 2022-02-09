@@ -1,7 +1,5 @@
 namespace Template.Web.Infrastructure.Token;
 
-using System;
-
 using Microsoft.AspNetCore.Mvc.Filters;
 
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]

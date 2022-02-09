@@ -1,7 +1,5 @@
 namespace Template.Models.Entity;
 
-using System;
-
 public class DataEntity
 {
     public int Id { get; set; }
