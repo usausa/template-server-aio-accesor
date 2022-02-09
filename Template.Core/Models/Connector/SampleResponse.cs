@@ -1,6 +1,5 @@
 namespace Template.Models.Connector;
 
-using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
 
 public class SampleResponse

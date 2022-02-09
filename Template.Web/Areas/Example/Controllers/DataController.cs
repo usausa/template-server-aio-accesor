@@ -1,12 +1,9 @@
 namespace Template.Web.Areas.Example.Controllers;
 
-using System.Threading.Tasks;
-
 using AutoMapper;
 
 using Microsoft.AspNetCore.Mvc;
 
-using Template.Models.Paging;
 using Template.Services;
 using Template.Web.Areas.Example.Models;
 

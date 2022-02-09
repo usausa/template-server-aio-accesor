@@ -2,7 +2,6 @@ namespace Template.Models.Paging;
 
 using System;
 using System.Collections;
-using System.Collections.Generic;
 
 public class Paged<T> : IPaged, IPageOver, IEnumerable<T>
 {

@@ -1,7 +1,6 @@
 namespace Template.Web.Infrastructure.ViewHelpers;
 
 using System;
-using System.Globalization;
 
 public static class ViewExtensions
 {

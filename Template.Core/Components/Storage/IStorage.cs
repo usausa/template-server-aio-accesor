@@ -1,8 +1,6 @@
 namespace Template.Components.Storage;
 
 using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
 
 public interface IStorage
 {

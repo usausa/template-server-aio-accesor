@@ -1,7 +1,5 @@
 namespace Template.Models.Entity;
 
-using System.Diagnostics.CodeAnalysis;
-
 public class AccountEntity
 {
     [AllowNull]

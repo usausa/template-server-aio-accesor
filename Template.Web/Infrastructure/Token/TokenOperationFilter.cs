@@ -1,7 +1,5 @@
 namespace Template.Web.Infrastructure.Token;
 
-using System.Collections.Generic;
-
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 

@@ -1,13 +1,6 @@
 namespace Template.Services;
 
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-using Smart.Data;
-using Smart.Data.Accessor;
-
 using Template.Accessors;
-using Template.Models.Entity;
 
 public class ItemService
 {

@@ -1,13 +1,11 @@
 namespace Template.Web.Areas.Api.Controllers;
 
 using System.Linq;
-using System.Threading.Tasks;
 
 using AutoMapper;
 
 using Microsoft.AspNetCore.Mvc;
 
-using Template.Models.Entity;
 using Template.Services;
 using Template.Web.Areas.Api.Models;
 

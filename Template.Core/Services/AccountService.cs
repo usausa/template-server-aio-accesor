@@ -1,11 +1,6 @@
 namespace Template.Services;
 
-using System.Threading.Tasks;
-
-using Smart.Data.Accessor;
-
 using Template.Accessors;
-using Template.Models.Entity;
 
 public class AccountService
 {

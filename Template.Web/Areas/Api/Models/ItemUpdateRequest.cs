@@ -1,7 +1,6 @@
 namespace Template.Web.Areas.Api.Models;
 
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
 
 public class ItemUpdateRequestEntry
 {

@@ -1,6 +1,5 @@
 namespace Template.Web.Infrastructure.TagHelpers;
 
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 

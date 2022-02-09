@@ -1,7 +1,6 @@
 namespace Template.Web.Infrastructure.TagHelpers;
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 using Microsoft.AspNetCore.Mvc.Rendering;

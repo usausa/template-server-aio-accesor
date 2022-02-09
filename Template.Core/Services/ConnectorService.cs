@@ -1,13 +1,8 @@
 namespace Template.Services;
 
 using System.Net.Http;
-using System.Threading.Tasks;
-
-using Microsoft.Extensions.Logging;
 
 using Rester;
-
-using Template.Models.Connector;
 
 public class ConnectorService
 {

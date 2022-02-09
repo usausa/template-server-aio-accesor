@@ -1,7 +1,5 @@
 namespace Template.Web.Areas.Example.Controllers;
 
-using System.Threading.Tasks;
-
 using Microsoft.AspNetCore.Mvc;
 
 using Template.Services;

@@ -1,13 +1,8 @@
 namespace Template.Services;
 
 using System;
-using System.Threading.Tasks;
 
 using Template.Accessors;
-using Template.Models.Entity;
-using Template.Models.Paging;
-
-using Smart.Data.Accessor;
 
 public class DataSearchParameter : Pageable
 {

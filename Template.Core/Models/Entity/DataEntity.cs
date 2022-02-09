@@ -1,7 +1,6 @@
 namespace Template.Models.Entity;
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 
 public class DataEntity
 {

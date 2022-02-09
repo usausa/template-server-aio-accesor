@@ -1,10 +1,7 @@
 //namespace Template.Web.Infrastructure.Filters;
 
 //using System;
-//using System.Globalization;
 //using System.Linq;
-
-//using Template.Models.Paging;
 
 //using Microsoft.AspNetCore.Mvc;
 //using Microsoft.AspNetCore.Mvc.Filters;

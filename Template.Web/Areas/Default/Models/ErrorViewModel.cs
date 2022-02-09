@@ -1,7 +1,6 @@
 namespace Template.Web.Areas.Default.Models;
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 
 public class ErrorViewModel
 {

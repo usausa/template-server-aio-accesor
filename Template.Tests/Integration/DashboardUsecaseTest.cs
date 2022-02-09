@@ -1,12 +1,5 @@
 namespace Template.Integration;
 
-using System.Threading.Tasks;
-
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.Testing;
-
-using Xunit;
-
 // TODO ref https://docs.microsoft.com/ja-jp/aspnet/core/test/integration-tests
 public class DashboardUsecaseTest
 {

@@ -2,8 +2,6 @@ namespace Template.Components.Storage;
 
 using System.IO;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 public sealed class FileStorage : IStorage
 {
