@@ -37,6 +37,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="appsettings.*.json" CopyToPublishDirectory="Never" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="ipaexg.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
