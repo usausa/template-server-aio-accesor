@@ -1,7 +1,5 @@
 namespace Template.Web.Areas.Api.Controllers;
 
-using System.Linq;
-
 using Template.Web.Areas.Api.Models;
 
 [System.Diagnostics.CodeAnalysis.SuppressMessage("Security", "CA5391", Justification = "API Controller")]

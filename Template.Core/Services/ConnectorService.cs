@@ -1,7 +1,5 @@
 namespace Template.Services;
 
-using System.Net.Http;
-
 using Rester;
 
 public class ConnectorService

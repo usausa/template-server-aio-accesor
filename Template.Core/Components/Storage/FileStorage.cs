@@ -1,8 +1,5 @@
 namespace Template.Components.Storage;
 
-using System.IO;
-using System.Linq;
-
 public sealed class FileStorage : IStorage
 {
     private const int CopyBufferSize = 81920;

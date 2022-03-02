@@ -1,7 +1,5 @@
 namespace Template.Components.Storage;
 
-using System.IO;
-
 public interface IStorage
 {
     ValueTask<bool> FileExistsAsync(string path, CancellationToken cancellationToken = default);
