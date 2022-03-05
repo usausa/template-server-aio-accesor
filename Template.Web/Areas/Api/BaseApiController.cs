@@ -4,6 +4,6 @@ namespace Template.Web.Areas.Api;
 [Route("[area]/[controller]/[action]")]
 [ApiController]
 [TokenFilter]
-public class BaseApiController : Controller
+public class BaseApiController : ControllerBase
 {
 }

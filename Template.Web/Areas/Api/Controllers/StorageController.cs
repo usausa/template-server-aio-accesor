@@ -8,7 +8,7 @@ using Template.Components.Storage;
 [ApiController]
 [TokenFilter]
 [ApiExplorerSettings(IgnoreApi = true)]
-public class StorageController : Controller
+public class StorageController : ControllerBase
 {
     private const string ContextType = "application/octet-stream";
 
