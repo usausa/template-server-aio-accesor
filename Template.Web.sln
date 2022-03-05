@@ -21,14 +21,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		publish-linux-x64-single.bat = publish-linux-x64-single.bat
 		publish-win10-x64-single.bat = publish-win10-x64-single.bat
 		README.md = README.md
-		Template.sln.DotSettings = Template.sln.DotSettings
+		Template.Web.sln.DotSettings = Template.Web.sln.DotSettings
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{0054F69F-70A7-491E-A9F8-955BA96FA67E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{15C6D32E-7C5B-45B7-96F8-CE334994F9FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Template.Tests", "Template.Tests\Template.Tests.csproj", "{5F458980-EAFD-4CFB-8122-52A178304B46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Template.Tests", "Template.Tests\Template.Tests.csproj", "{5F458980-EAFD-4CFB-8122-52A178304B46}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
