@@ -65,7 +65,7 @@ GlobalFontSettings.FontResolver = new FontResolver(Directory.GetCurrentDirectory
     { FontNames.Gothic, "ipaexg.ttf" }
 });
 
-// Add framework builder.Services.
+// Add framework Services.
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSingleton(HtmlEncoder.Create(UnicodeRanges.All));
 
