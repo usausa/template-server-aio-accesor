@@ -11,8 +11,7 @@ public sealed class MessageTagHelper : TagHelper
 {
     [HtmlAttributeNotBound]
     [ViewContext]
-    [AllowNull]
-    public ViewContext ViewContext { get; set; }
+    public ViewContext ViewContext { get; set; } = default!;
 
     public override void Process(TagHelperContext context, TagHelperOutput output)
     {

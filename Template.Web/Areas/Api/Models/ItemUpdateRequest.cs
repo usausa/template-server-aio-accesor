@@ -2,8 +2,7 @@ namespace Template.Web.Areas.Api.Models;
 
 public class ItemUpdateRequestEntry
 {
-    [AllowNull]
-    public string Code { get; set; }
+    public string Code { get; set; } = default!;
 
     public int Value { get; set; }
 }
@@ -11,6 +10,5 @@ public class ItemUpdateRequestEntry
 public class ItemUpdateRequest
 {
     [Required]
-    [AllowNull]
-    public ItemUpdateRequestEntry[] Entries { get; set; }
+    public ItemUpdateRequestEntry[] Entries { get; set; } = default!;
 }

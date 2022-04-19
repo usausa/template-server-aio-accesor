@@ -2,8 +2,7 @@ namespace Template.Web.Settings;
 
 public class ServerSetting
 {
-    [AllowNull]
-    public string ApiToken { get; set; }
+    public string ApiToken { get; set; } = default!;
 
     public int LongTimeThreshold { get; set; }
 

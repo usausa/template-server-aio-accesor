@@ -2,14 +2,11 @@ namespace Template.Models.Entity;
 
 public class ItemEntity
 {
-    [AllowNull]
-    public string Code { get; set; }
+    public string Code { get; set; } = default!;
 
-    [AllowNull]
-    public string Category { get; set; }
+    public string Category { get; set; } = default!;
 
-    [AllowNull]
-    public string Name { get; set; }
+    public string Name { get; set; } = default!;
 
     public int Value { get; set; }
 }

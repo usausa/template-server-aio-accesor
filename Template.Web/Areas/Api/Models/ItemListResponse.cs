@@ -3,6 +3,5 @@ namespace Template.Web.Areas.Api.Models;
 public class ItemListResponse
 {
     [Required]
-    [AllowNull]
-    public ItemEntity[] Entries { get; set; }
+    public ItemEntity[] Entries { get; set; } = default!;
 }

@@ -2,14 +2,11 @@ namespace Template.Models.Entity;
 
 public class AccountEntity
 {
-    [AllowNull]
-    public string Id { get; set; }
+    public string Id { get; set; } = default!;
 
-    [AllowNull]
-    public string Name { get; set; }
+    public string Name { get; set; } = default!;
 
-    [AllowNull]
-    public string PasswordHash { get; set; }
+    public string PasswordHash { get; set; } = default!;
 
     public bool IsAdmin { get; set; }
 }
