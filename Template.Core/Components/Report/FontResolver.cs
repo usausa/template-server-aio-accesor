@@ -1,7 +1,5 @@
 namespace Template.Components.Report;
 
-using System.IO;
-
 using PdfSharpCore.Fonts;
 
 public class FontResolver : IFontResolver

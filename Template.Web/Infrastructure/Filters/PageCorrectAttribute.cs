@@ -1,7 +1,5 @@
 //namespace Template.Web.Infrastructure.Filters;
 
-//using System.Linq;
-
 //using Microsoft.AspNetCore.Mvc.Filters;
 
 //using Smart.AspNetCore;
