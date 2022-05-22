@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Hosting.WindowsServices;
 using Microsoft.Extensions.Options;
 using Microsoft.Net.Http.Headers;
 
@@ -42,8 +43,19 @@ using Template.Components.Storage;
 //--------------------------------------------------------------------------------
 // Configure builder
 //--------------------------------------------------------------------------------
+Directory.SetCurrentDirectory(AppContext.BaseDirectory);
 
-var builder = WebApplication.CreateBuilder(args);
+// Configure builder
+var builder = WebApplication.CreateBuilder(new WebApplicationOptions
+{
+    Args = args,
+    ContentRootPath = WindowsServiceHelpers.IsWindowsService() ? AppContext.BaseDirectory : default
+});
+
+// Service
+builder.Host
+    .UseWindowsService()
+    .UseSystemd();
 
 // Log
 builder.Host
