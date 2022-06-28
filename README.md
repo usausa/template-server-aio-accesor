@@ -1,4 +1,4 @@
-# template-server-aio-accesor
+# Template project dor ASP.NET Core
 
 ASP.NET Core template project.
 
