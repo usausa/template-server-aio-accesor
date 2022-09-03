@@ -1,5 +1,3 @@
-using System.Data;
-using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json.Serialization;
 using System.Text.Unicode;
@@ -33,7 +31,6 @@ using Smart.Data.SqlClient;
 using StackExchange.Profiling;
 using StackExchange.Profiling.Data;
 
-using Template.Components.Json;
 using Template.Components.Report;
 using Template.Components.Security;
 using Template.Components.Storage;
@@ -138,7 +135,7 @@ builder.Services
     {
         options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
         options.JsonSerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
-        options.JsonSerializerOptions.Converters.Add(new DateTimeConverter());
+        options.JsonSerializerOptions.Converters.Add(new Template.Components.Json.DateTimeConverter());
     });
 
 // SignalR
@@ -204,7 +201,7 @@ builder.Services.AddHttpClient(ConnectorNames.Sample, c =>
 
 RestConfig.Default.UseJsonSerializer(config =>
 {
-    config.Converters.Add(new DateTimeConverter());
+    config.Converters.Add(new Template.Components.Json.DateTimeConverter());
     config.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
     config.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
 });

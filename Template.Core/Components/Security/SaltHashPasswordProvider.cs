@@ -1,7 +1,6 @@
 namespace Template.Components.Security;
 
 using System.Security.Cryptography;
-using System.Text;
 
 public sealed class SaltHashPasswordProvider : IPasswordProvider
 {
