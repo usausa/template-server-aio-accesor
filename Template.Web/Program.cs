@@ -55,11 +55,8 @@ builder.Host
     .UseSystemd();
 
 // Log
+builder.Logging.ClearProviders();
 builder.Host
-    .ConfigureLogging((_, logging) =>
-    {
-        logging.ClearProviders();
-    })
     .UseSerilog((hostingContext, loggerConfiguration) =>
     {
         loggerConfiguration.ReadFrom.Configuration(hostingContext.Configuration);
@@ -79,7 +76,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddSingleton(HtmlEncoder.Create(UnicodeRanges.All));
 
 // Settings
-var serverSetting = builder.Configuration.GetSection("Server").Get<ServerSetting>();
+var serverSetting = builder.Configuration.GetSection("Server").Get<ServerSetting>()!;
 builder.Services.AddSingleton(serverSetting);
 
 // Route
@@ -192,7 +189,7 @@ builder.Services.AddSingleton<IMapper>(new Mapper(new MapperConfiguration(c =>
 })));
 
 // HttpClient
-var connectorSetting = builder.Configuration.GetSection("Connector").Get<ConnectorSetting>();
+var connectorSetting = builder.Configuration.GetSection("Connector").Get<ConnectorSetting>()!;
 builder.Services.AddHttpClient(ConnectorNames.Sample, c =>
 {
     c.BaseAddress = new Uri(connectorSetting.SampleBaseUrl);

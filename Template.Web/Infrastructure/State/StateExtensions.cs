@@ -10,7 +10,7 @@ public static class StateExtensions
             return urlHelper.Action(action);
         }
 
-        return urlHelper.Action(action) + StateHelper.Decode(state);
+        return urlHelper.Action(action) + StateHelper.Decode(state!);
     }
 
     public static string State(this HttpContext context) =>
