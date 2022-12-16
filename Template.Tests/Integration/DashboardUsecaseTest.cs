@@ -3,7 +3,7 @@ namespace Template.Integration;
 // TODO ref https://docs.microsoft.com/ja-jp/aspnet/core/test/integration-tests
 public class DashboardUsecaseTest
 {
-    private class CustomWebApplicationFactory : WebApplicationFactory<Program>
+    private sealed class CustomWebApplicationFactory : WebApplicationFactory<Program>
     {
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
