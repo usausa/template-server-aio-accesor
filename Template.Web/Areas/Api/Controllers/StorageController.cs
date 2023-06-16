@@ -27,13 +27,13 @@ public class StorageController : ControllerBase
     [HttpGet("{**path}")]
     public async ValueTask<IActionResult> Get([FromRoute] string? path = "/")
     {
-        Log.LogInformation("Get. path=[{Path}]", path);
+        Log.InfoStorageGet(path);
 
         if (path!.EndsWith('/'))
         {
             if (!await Storage.DirectoryExistsAsync(path))
             {
-                Log.LogWarning("Get not found. path=[{Path}]", path);
+                Log.WarnStorageNotFound(path);
 
                 return NotFound();
             }
@@ -44,7 +44,7 @@ public class StorageController : ControllerBase
 
         if (!await Storage.FileExistsAsync(path))
         {
-            Log.LogWarning("Get not found. path=[{Path}]", path);
+            Log.WarnStorageNotFound(path);
 
             return NotFound();
         }
@@ -58,7 +58,7 @@ public class StorageController : ControllerBase
     [ReadableBodyStream]
     public async ValueTask<IActionResult> Post([FromRoute] string path)
     {
-        Log.LogInformation("Post. path=[{Path}]", path);
+        Log.InfoStoragePost(path);
 
         await Storage.WriteAsync(path, Request.Body);
 
@@ -68,7 +68,7 @@ public class StorageController : ControllerBase
     [HttpDelete("{**path}")]
     public async ValueTask<IActionResult> Delete([FromRoute] string path)
     {
-        Log.LogInformation("Delete. path=[{Path}]", path);
+        Log.InfoStorageDelete(path);
 
         await Storage.DeleteAsync(path);
 

@@ -22,7 +22,7 @@ public class ConnectorService
         var result = await client.GetAsync<SampleResponse>("?format=json").ConfigureAwait(false);
         if (result.Content is null)
         {
-            Log.LogWarning("Sample get failed. result=[{RestResult}], statusCode=[{StatusCode}]", result.RestResult, result.StatusCode);
+            Log.InfoConnectorGetFailed(result.RestResult, result.StatusCode);
         }
 
         return result.Content;
