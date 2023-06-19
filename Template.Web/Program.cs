@@ -40,7 +40,6 @@ using Template.Components.Storage;
 //--------------------------------------------------------------------------------
 // Configure builder
 //--------------------------------------------------------------------------------
-// Configure builder
 var builder = WebApplication.CreateBuilder(new WebApplicationOptions
 {
     Args = args,
