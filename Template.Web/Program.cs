@@ -1,3 +1,5 @@
+using System.IO.Compression;
+using System.Net.Mime;
 using System.Text.Encodings.Web;
 using System.Text.Json.Serialization;
 using System.Text.Unicode;
@@ -136,11 +138,17 @@ builder.Services
 builder.Services.AddSignalR();
 
 // Compress
+builder.Services.AddRequestDecompression();
 builder.Services.AddResponseCompression(options =>
 {
-    options.Providers.Add<GzipCompressionProvider>();
-    options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[] { "application/json" });
+    // Default false (for CRIME and BREACH attacks)
     options.EnableForHttps = true;
+    options.Providers.Add<GzipCompressionProvider>();
+    options.MimeTypes = new[] { MediaTypeNames.Application.Json };
+});
+builder.Services.Configure<GzipCompressionProviderOptions>(options =>
+{
+    options.Level = CompressionLevel.Fastest;
 });
 
 // Swagger
@@ -299,12 +307,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// Compress
-app.UseResponseCompression();
-app.UseRequestDecompress();
-
 // Routing
 app.UseRouting();
+
+// Compress
+app.UseResponseCompression();
+app.UseRequestDecompression();
 
 // CORS
 //app.UseCors();
