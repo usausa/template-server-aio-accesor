@@ -225,7 +225,7 @@ builder.Services.AddDataAccessor(c =>
 });
 
 // Security
-builder.Services.AddSingleton<DefaultPasswordProvider>();
+builder.Services.AddSingleton<DefaultPasswordProviderOptions>();
 builder.Services.AddSingleton<IPasswordProvider, DefaultPasswordProvider>();
 
 // Storage
