@@ -27,7 +27,7 @@ public class AccountManager
     public async ValueTask<bool> LoginAsync(string id, string password)
     {
         var account = await AccountService.QueryAccountAsync(id);
-        if ((account is null) || !PasswordProvider.Match(password, account.PasswordHash))
+        if ((account is null) || !PasswordProvider.Match(password, Convert.FromBase64String(account.PasswordHash)))
         {
             return false;
         }

@@ -225,8 +225,8 @@ builder.Services.AddDataAccessor(c =>
 });
 
 // Security
-builder.Services.AddSingleton<SaltHashPasswordOptions>();
-builder.Services.AddSingleton<IPasswordProvider, SaltHashPasswordProvider>();
+builder.Services.AddSingleton<DefaultPasswordProvider>();
+builder.Services.AddSingleton<IPasswordProvider, DefaultPasswordProvider>();
 
 // Storage
 builder.Services.Configure<FileStorageOptions>(builder.Configuration.GetSection("Storage"));
