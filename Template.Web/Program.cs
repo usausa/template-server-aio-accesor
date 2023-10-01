@@ -244,14 +244,17 @@ builder.Services
     .AddHealthChecks()
     .AddCheck<CustomHealthCheck>("custom_check", tags: new[] { "app" });
 
-// Swagger
-builder.Services.AddSwaggerGen();
-
-// Profiler
-builder.Services.AddMiniProfiler(options =>
+if (!builder.Environment.IsProduction())
 {
-    options.RouteBasePath = "/profiler";
-});
+    // Swagger
+    builder.Services.AddSwaggerGen();
+
+    // Profiler
+    builder.Services.AddMiniProfiler(options =>
+    {
+        options.RouteBasePath = "/profiler";
+    });
+}
 
 //--------------------------------------------------------------------------------
 // Configure the HTTP request pipeline
@@ -267,6 +270,7 @@ if (!app.Environment.IsProduction())
         options.IncludeQueryInRequestPath = true;
     });
 }
+
 // Error handler
 if (!app.Environment.IsProduction())
 {
@@ -329,6 +333,8 @@ app.UseAuthorization();
 // Map
 app.MapControllers();
 // TODO SignalR
+
+// Metrics
 app.MapMetrics();
 
 // Run
