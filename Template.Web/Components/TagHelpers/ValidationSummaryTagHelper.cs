@@ -1,4 +1,4 @@
-namespace Template.Web.Infrastructure.TagHelpers;
+namespace Template.Web.Components.TagHelpers;
 
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;

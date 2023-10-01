@@ -1,4 +1,4 @@
-namespace Template.Web.Infrastructure.ViewFeatures;
+namespace Template.Web.Components;
 
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 

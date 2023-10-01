@@ -1,4 +1,4 @@
-namespace Template.Web.Infrastructure.ViewHelpers;
+namespace Template.Web.Components;
 
 public static class ViewExtensions
 {
