@@ -4,8 +4,6 @@ using System.Text.Encodings.Web;
 using System.Text.Json.Serialization;
 using System.Text.Unicode;
 
-using AspNetCoreComponents.IpFilter;
-
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -155,23 +153,7 @@ builder.Services.Configure<GzipCompressionProviderOptions>(options =>
     options.Level = CompressionLevel.Fastest;
 });
 
-// Swagger
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-// Profiler
-if (!builder.Environment.IsProduction())
-{
-    builder.Services.AddMiniProfiler(options =>
-    {
-        options.RouteBasePath = "/profiler";
-    });
-}
-
-// Health
-builder.Services
-    .AddHealthChecks()
-    .AddCheck<CustomHealthCheck>("custom_check", tags: new[] { "app" });
 
 // Authentication
 builder.Services
@@ -257,6 +239,20 @@ builder.Services.AddSingleton<ConnectorService>();
 // Hub
 // TODO
 
+// Health
+builder.Services
+    .AddHealthChecks()
+    .AddCheck<CustomHealthCheck>("custom_check", tags: new[] { "app" });
+
+// Swagger
+builder.Services.AddSwaggerGen();
+
+// Profiler
+builder.Services.AddMiniProfiler(options =>
+{
+    options.RouteBasePath = "/profiler";
+});
+
 //--------------------------------------------------------------------------------
 // Configure the HTTP request pipeline
 //--------------------------------------------------------------------------------
@@ -264,7 +260,7 @@ builder.Services.AddSingleton<ConnectorService>();
 var app = builder.Build();
 
 // Serilog
-if (app.Environment.IsDevelopment())
+if (!app.Environment.IsProduction())
 {
     app.UseSerilogRequestLogging(options =>
     {
@@ -301,22 +297,17 @@ app.UseStaticFiles(new StaticFileOptions
 });
 
 // Health
-app.UsePathRestrict("/health", serverSetting.AllowHealth?.Select(System.Net.IPNetwork.Parse).ToArray());
 app.UseHealthChecks("/health");
 
 // Metrics
-app.UsePathRestrict("/metrics", serverSetting.AllowMetrics?.Select(System.Net.IPNetwork.Parse).ToArray());
 app.UseHttpMetrics();
 
-// Profiler
 if (!app.Environment.IsProduction())
 {
+    // Profiler
     app.UseMiniProfiler();
-}
 
-// Swagger
-if (app.Environment.IsDevelopment())
-{
+    // Swagger
     app.UseSwagger();
     app.UseSwaggerUI();
 }
