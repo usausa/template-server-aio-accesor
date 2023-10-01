@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Hosting.WindowsServices;
 using Microsoft.Extensions.Options;
+using Microsoft.FeatureManagement;
 using Microsoft.Net.Http.Headers;
 
 using PdfSharpCore.Fonts;
@@ -36,6 +37,7 @@ using StackExchange.Profiling.Data;
 using Template.Components.Report;
 using Template.Components.Security;
 using Template.Components.Storage;
+using Template.Web.Application.HealthChecks;
 
 #pragma warning disable CA1812
 
@@ -55,11 +57,10 @@ builder.Host
 
 // Log
 builder.Logging.ClearProviders();
-builder.Host
-    .UseSerilog((hostingContext, loggerConfiguration) =>
-    {
-        loggerConfiguration.ReadFrom.Configuration(hostingContext.Configuration);
-    });
+builder.Services.AddSerilog(option =>
+{
+    option.ReadFrom.Configuration(builder.Configuration);
+});
 
 // System
 Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
@@ -77,6 +78,9 @@ builder.Services.AddSingleton(HtmlEncoder.Create(UnicodeRanges.All));
 // Settings
 var serverSetting = builder.Configuration.GetSection("Server").Get<ServerSetting>()!;
 builder.Services.AddSingleton(serverSetting);
+
+// Feature management
+builder.Services.AddFeatureManagement();
 
 // Route
 builder.Services.Configure<RouteOptions>(options =>
@@ -165,7 +169,9 @@ if (!builder.Environment.IsProduction())
 }
 
 // Health
-builder.Services.AddHealthChecks();
+builder.Services
+    .AddHealthChecks()
+    .AddCheck<CustomHealthCheck>("custom_check", tags: new[] { "app" });
 
 // Authentication
 builder.Services
@@ -257,6 +263,14 @@ builder.Services.AddSingleton<ConnectorService>();
 
 var app = builder.Build();
 
+// Serilog
+if (app.Environment.IsDevelopment())
+{
+    app.UseSerilogRequestLogging(options =>
+    {
+        options.IncludeQueryInRequestPath = true;
+    });
+}
 // Error handler
 if (!app.Environment.IsProduction())
 {
