@@ -6,6 +6,7 @@ using System.Text.Unicode;
 
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Data.SqlClient;
@@ -24,7 +25,6 @@ using Serilog;
 
 using Smart.AspNetCore;
 using Smart.AspNetCore.ApplicationModels;
-using Smart.AspNetCore.Filters;
 using Smart.Data;
 using Smart.Data.Accessor.Extensions.DependencyInjection;
 using Smart.Data.SqlClient;
@@ -60,6 +60,17 @@ builder.Services.AddSerilog(option =>
     option.ReadFrom.Configuration(builder.Configuration);
 });
 
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddHttpLogging(options =>
+    {
+        //options.LoggingFields = HttpLoggingFields.All | HttpLoggingFields.RequestQuery;
+        options.LoggingFields = HttpLoggingFields.RequestPropertiesAndHeaders |
+                                HttpLoggingFields.RequestQuery |
+                                HttpLoggingFields.ResponsePropertiesAndHeaders;
+    });
+}
+
 // System
 Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
@@ -80,12 +91,6 @@ builder.Services.AddSingleton(serverSetting);
 // Feature management
 builder.Services.AddFeatureManagement();
 
-// Route
-builder.Services.Configure<RouteOptions>(options =>
-{
-    options.AppendTrailingSlash = true;
-});
-
 // Size limit
 builder.Services.Configure<FormOptions>(options =>
 {
@@ -93,6 +98,12 @@ builder.Services.Configure<FormOptions>(options =>
     options.ValueLengthLimit = int.MaxValue;
     // Default 128MB
     options.MultipartBodyLengthLimit = Int64.MaxValue;
+});
+
+// Route
+builder.Services.Configure<RouteOptions>(options =>
+{
+    options.AppendTrailingSlash = true;
 });
 
 // XForward
@@ -111,7 +122,7 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
 //});
 
 // Filter
-builder.Services.AddSingleton<ExceptionStatusFilter>();
+//builder.Services.AddSingleton<ExceptionStatusFilter>(); // TODO status
 builder.Services.AddTimeLogging(options =>
 {
     options.Threshold = serverSetting.LongTimeThreshold;
@@ -122,9 +133,9 @@ builder.Services.AddSingleton(new TokenSetting { Token = serverSetting.ApiToken 
 builder.Services
     .AddControllersWithViews(options =>
     {
-        options.Filters.AddExceptionStatus();
-        options.Filters.AddTimeLogging();
         options.Conventions.Add(new LowercaseControllerModelConvention());
+        //options.Filters.AddExceptionStatus(); // TODO status
+        options.Filters.AddTimeLogging();
     })
 #if DEBUG
     .AddRazorRuntimeCompilation()
@@ -135,6 +146,28 @@ builder.Services
         options.JsonSerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
         options.JsonSerializerOptions.Converters.Add(new Template.Components.Json.DateTimeConverter());
     });
+
+builder.Services.AddEndpointsApiExplorer();
+
+// Swagger
+if (!builder.Environment.IsProduction())
+{
+    builder.Services.AddSwaggerGen();
+}
+
+// Rate limit
+builder.Services.AddRateLimiter(_ =>
+{
+});
+
+// Error handler
+builder.Services.AddProblemDetails(options =>
+{
+    options.CustomizeProblemDetails = context =>
+    {
+        context.ProblemDetails.Extensions.Add("nodeId", Environment.MachineName);
+    };
+});
 
 // SignalR
 builder.Services.AddSignalR();
@@ -153,7 +186,20 @@ builder.Services.Configure<GzipCompressionProviderOptions>(options =>
     options.Level = CompressionLevel.Fastest;
 });
 
-builder.Services.AddEndpointsApiExplorer();
+// Health
+builder.Services
+    .AddHealthChecks()
+    .AddCheck<CustomHealthCheck>("custom_check", tags: new[] { "app" });
+
+// Develop
+if (!builder.Environment.IsProduction())
+{
+    // Profiler
+    builder.Services.AddMiniProfiler(options =>
+    {
+        options.RouteBasePath = "/profiler";
+    });
+}
 
 // Authentication
 builder.Services
@@ -239,56 +285,58 @@ builder.Services.AddSingleton<ConnectorService>();
 // Hub
 // TODO
 
-// Health
-builder.Services
-    .AddHealthChecks()
-    .AddCheck<CustomHealthCheck>("custom_check", tags: new[] { "app" });
-
-// Develop
-if (!builder.Environment.IsProduction())
-{
-    // Swagger
-    builder.Services.AddSwaggerGen();
-
-    // Profiler
-    builder.Services.AddMiniProfiler(options =>
-    {
-        options.RouteBasePath = "/profiler";
-    });
-}
-
 //--------------------------------------------------------------------------------
 // Configure the HTTP request pipeline
 //--------------------------------------------------------------------------------
 
 var app = builder.Build();
 
-// Serilog
-if (!app.Environment.IsProduction())
+// Log
+if (app.Environment.IsDevelopment())
 {
+    // Serilog
     app.UseSerilogRequestLogging(options =>
     {
         options.IncludeQueryInRequestPath = true;
     });
-}
 
-// Error handler
-if (!app.Environment.IsProduction())
-{
-    app.UseDeveloperExceptionPage();
+    // HTTP log
+    app.UseWhen(
+        c => c.Request.Path.StartsWithSegments("/api", StringComparison.OrdinalIgnoreCase),
+        b => b.UseHttpLogging());
+    //app.UseHttpLogging();
 }
-else
-{
-    app.UseExceptionHandler("/error/500");
-    app.UseHsts();
-}
-
-app.UseStatusCodePagesWithReExecute("/error/{0}");
 
 // Forwarded headers
 app.UseForwardedHeaders();
 
-// Configure the HTTP request pipeline.
+// TODO check
+// Error handler
+app.UseWhen(
+    c => c.Request.Path.StartsWithSegments("/api", StringComparison.OrdinalIgnoreCase),
+    b => b.UseExceptionHandler());
+if (app.Environment.IsProduction())
+{
+    app.UseWhen(
+        c => !c.Request.Path.StartsWithSegments("/api", StringComparison.OrdinalIgnoreCase),
+        b =>
+        {
+            b.UseStatusCodePagesWithReExecute("/error/{0}");
+            b.UseStatusCodePagesWithReExecute("/error/{0}");
+        });
+}
+else
+{
+    app.UseWhen(
+        c => !c.Request.Path.StartsWithSegments("/api", StringComparison.OrdinalIgnoreCase),
+        b =>
+        {
+            b.UseDeveloperExceptionPage();
+            b.UseStatusCodePagesWithReExecute("/error/{0}");
+        });
+}
+
+// HSTS
 if (!app.Environment.IsDevelopment())
 {
     app.UseHsts();
@@ -307,11 +355,8 @@ app.UseStaticFiles(new StaticFileOptions
     }
 });
 
-// Health
-app.UseHealthChecks("/health");
-
-// Metrics
-app.UseHttpMetrics();
+// Coolie policy
+//app.UseCookiePolicy();
 
 // Develop
 if (!app.Environment.IsProduction())
@@ -327,23 +372,61 @@ if (!app.Environment.IsProduction())
 // Routing
 app.UseRouting();
 
-// Compress
-app.UseResponseCompression();
-app.UseRequestDecompression();
+// Rate limit
+//app.UseRateLimiter();
+
+// Localize
+//app.UseRequestLocalization();
 
 // CORS
 //app.UseCors();
+
+// Develop
+if (!app.Environment.IsProduction())
+{
+    // Profiler
+    app.UseMiniProfiler();
+
+    // Swagger
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+// Health
+app.UseHealthChecks("/health");
+
+// Metrics
+app.UseHttpMetrics();
 
 // Authentication/Authorization
 app.UseAuthentication();
 app.UseAuthorization();
 
+// Session
+//app.UseSession();
+
+// Compress
+app.UseWhen(
+    c => c.Request.Path.StartsWithSegments("/api", StringComparison.OrdinalIgnoreCase),
+    b =>
+    {
+        b.UseResponseCompression();
+        b.UseRequestDecompression();
+    });
+
+// Cache
+// app.UseResponseCaching();
+
 // Map
 app.MapControllers();
+
 // TODO SignalR
 
 // Metrics
 app.MapMetrics();
+
+// Health
+app.UseHealthChecks("/health");
 
 // Run
 app.Run();
