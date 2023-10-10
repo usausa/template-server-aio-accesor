@@ -310,24 +310,19 @@ if (app.Environment.IsDevelopment())
 // Forwarded headers
 app.UseForwardedHeaders();
 
-// TODO check
 // Error handler
-app.UseWhen(
-    c => c.Request.Path.StartsWithSegments("/api", StringComparison.OrdinalIgnoreCase),
-    b => b.UseExceptionHandler());
 if (app.Environment.IsProduction())
 {
     app.UseWhen(
-        c => !c.Request.Path.StartsWithSegments("/api", StringComparison.OrdinalIgnoreCase),
-        b =>
-        {
-            b.UseStatusCodePagesWithReExecute("/error/{0}");
-        });
+        c => c.Request.Path.StartsWithSegments("/api", StringComparison.OrdinalIgnoreCase),
+        b => b.UseExceptionHandler(),
+        b => b.UseStatusCodePagesWithReExecute("/error/{0}"));
 }
 else
 {
     app.UseWhen(
-        c => !c.Request.Path.StartsWithSegments("/api", StringComparison.OrdinalIgnoreCase),
+        c => c.Request.Path.StartsWithSegments("/api", StringComparison.OrdinalIgnoreCase),
+        b => b.UseExceptionHandler(),
         b =>
         {
             b.UseDeveloperExceptionPage();
