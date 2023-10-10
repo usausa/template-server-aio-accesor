@@ -392,9 +392,6 @@ if (!app.Environment.IsProduction())
     app.UseSwaggerUI();
 }
 
-// Health
-app.UseHealthChecks("/health");
-
 // Metrics
 app.UseHttpMetrics();
 
