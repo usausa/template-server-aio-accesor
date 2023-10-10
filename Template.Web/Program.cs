@@ -1,5 +1,3 @@
-using System.IO.Compression;
-using System.Net.Mime;
 using System.Text.Encodings.Web;
 using System.Text.Json.Serialization;
 using System.Text.Unicode;
@@ -8,7 +6,6 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Hosting.WindowsServices;
 using Microsoft.Extensions.Options;
@@ -174,18 +171,18 @@ builder.Services.AddProblemDetails(options =>
 builder.Services.AddSignalR();
 
 // Compress
-builder.Services.AddRequestDecompression();
-builder.Services.AddResponseCompression(options =>
-{
-    // Default false (for CRIME and BREACH attacks)
-    options.EnableForHttps = true;
-    options.Providers.Add<GzipCompressionProvider>();
-    options.MimeTypes = new[] { MediaTypeNames.Application.Json };
-});
-builder.Services.Configure<GzipCompressionProviderOptions>(options =>
-{
-    options.Level = CompressionLevel.Fastest;
-});
+//builder.Services.AddRequestDecompression();
+//builder.Services.AddResponseCompression(options =>
+//{
+//    // Default false (for CRIME and BREACH attacks)
+//    options.EnableForHttps = true;
+//    options.Providers.Add<GzipCompressionProvider>();
+//    options.MimeTypes = new[] { MediaTypeNames.Application.Json };
+//});
+//builder.Services.Configure<GzipCompressionProviderOptions>(options =>
+//{
+//    options.Level = CompressionLevel.Fastest;
+//});
 
 // Health
 builder.Services
@@ -387,13 +384,13 @@ app.UseAuthorization();
 //app.UseSession();
 
 // Compress
-app.UseWhen(
-    c => c.Request.Path.StartsWithSegments("/api", StringComparison.OrdinalIgnoreCase),
-    b =>
-    {
-        b.UseResponseCompression();
-        b.UseRequestDecompression();
-    });
+//app.UseWhen(
+//    c => c.Request.Path.StartsWithSegments("/api", StringComparison.OrdinalIgnoreCase),
+//    b =>
+//    {
+//        b.UseResponseCompression();
+//        b.UseRequestDecompression();
+//    });
 
 // Cache
 // app.UseResponseCaching();
@@ -407,7 +404,7 @@ app.MapControllers();
 app.MapMetrics();
 
 // Health
-app.UseHealthChecks("/health");
+app.MapHealthChecks("/health");
 
 // Run
 app.Run();
