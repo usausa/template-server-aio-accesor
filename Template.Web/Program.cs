@@ -322,7 +322,6 @@ if (app.Environment.IsProduction())
         b =>
         {
             b.UseStatusCodePagesWithReExecute("/error/{0}");
-            b.UseStatusCodePagesWithReExecute("/error/{0}");
         });
 }
 else

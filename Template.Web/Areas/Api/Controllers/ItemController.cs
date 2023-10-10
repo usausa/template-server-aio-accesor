@@ -29,7 +29,7 @@ public class ItemController : BaseApiController
     [HttpPost]
     public async ValueTask<IActionResult> Update([FromBody] ItemUpdateRequest request)
     {
-        await ItemService.UpdateItemList(request.Entries.Select(x => Mapper.Map<ItemEntity>(x)));
+        await ItemService.UpdateItemList(request.Entries.Select(Mapper.Map<ItemEntity>));
 
         return Ok();
     }
