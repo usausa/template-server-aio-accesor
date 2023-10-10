@@ -353,17 +353,6 @@ app.UseStaticFiles(new StaticFileOptions
 // Coolie policy
 //app.UseCookiePolicy();
 
-// Develop
-if (!app.Environment.IsProduction())
-{
-    // Profiler
-    app.UseMiniProfiler();
-
-    // Swagger
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
 // Routing
 app.UseRouting();
 
