@@ -19,9 +19,8 @@ public class ItemService
     public ValueTask<List<ItemEntity>> QueryItemListAsync(string category) =>
         ItemAccessor.QueryItemListAsync(category);
 
-    public async ValueTask UpdateItemList(IEnumerable<ItemEntity> entities)
-    {
-        await DbProvider.UsingTxAsync(async (_, tx) =>
+    public ValueTask UpdateItemList(IEnumerable<ItemEntity> entities) =>
+        DbProvider.UsingTxAsync(async (_, tx) =>
         {
             foreach (var entity in entities)
             {
@@ -29,6 +28,5 @@ public class ItemService
             }
 
             await tx.CommitAsync().ConfigureAwait(false);
-        }).ConfigureAwait(false);
-    }
+        });
 }
