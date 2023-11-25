@@ -10,7 +10,7 @@ public class DashboardUsecaseTest
             //builder.ConfigureServices(services =>
             //{
             //    // TODO Customize startup
-            //    services.Remove(services.First(x => x.ServiceType == typeof(IDbProvider)));
+            //    services.Remove(services.First(static x => x.ServiceType == typeof(IDbProvider)));
             //});
         }
     }

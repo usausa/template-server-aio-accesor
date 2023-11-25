@@ -7,8 +7,10 @@ public class ItemUpdateRequestEntry
     public int Value { get; set; }
 }
 
+#pragma warning disable CA1819
 public class ItemUpdateRequest
 {
     [Required]
     public ItemUpdateRequestEntry[] Entries { get; set; } = default!;
 }
+#pragma warning restore CA1819

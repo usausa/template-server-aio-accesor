@@ -12,7 +12,7 @@
 //        if (context.Result is ViewResult view)
 //        {
 //            var paged = view.Model as IPageOver ??
-//                        view.ViewData.Values.FirstOrDefault(x => x is IPageOver) as IPageOver;
+//                        view.ViewData.Values.FirstOrDefault(static x => x is IPageOver) as IPageOver;
 //            if (paged == null)
 //            {
 //                return;

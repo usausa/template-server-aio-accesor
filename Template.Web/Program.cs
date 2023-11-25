@@ -62,7 +62,7 @@ builder.Services.AddSerilog(option =>
 
 if (builder.Environment.IsDevelopment())
 {
-    builder.Services.AddHttpLogging(options =>
+    builder.Services.AddHttpLogging(static options =>
     {
         //options.LoggingFields = HttpLoggingFields.All | HttpLoggingFields.RequestQuery;
         options.LoggingFields = HttpLoggingFields.RequestPropertiesAndHeaders |
@@ -92,7 +92,7 @@ builder.Services.AddSingleton(serverSetting);
 builder.Services.AddFeatureManagement();
 
 // Size limit
-builder.Services.Configure<FormOptions>(options =>
+builder.Services.Configure<FormOptions>(static options =>
 {
     // Default 4MB
     options.ValueLengthLimit = int.MaxValue;
@@ -101,13 +101,13 @@ builder.Services.Configure<FormOptions>(options =>
 });
 
 // Route
-builder.Services.Configure<RouteOptions>(options =>
+builder.Services.Configure<RouteOptions>(static options =>
 {
     options.AppendTrailingSlash = true;
 });
 
 // XForward
-builder.Services.Configure<ForwardedHeadersOptions>(options =>
+builder.Services.Configure<ForwardedHeadersOptions>(static options =>
 {
     options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
 
@@ -117,7 +117,7 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
 });
 
 // CORS
-//builder.Services.Configure<CorsOptions>(options =>
+//builder.Services.Configure<CorsOptions>(static options =>
 //{
 //});
 
@@ -131,7 +131,7 @@ builder.Services.AddSingleton(new TokenSetting { Token = serverSetting.ApiToken 
 
 // Mvc
 builder.Services
-    .AddControllersWithViews(options =>
+    .AddControllersWithViews(static options =>
     {
         options.Conventions.Add(new LowercaseControllerModelConvention());
         //options.Filters.AddExceptionStatus(); // TODO status
@@ -140,7 +140,7 @@ builder.Services
 #if DEBUG
     .AddRazorRuntimeCompilation()
 #endif
-    .AddJsonOptions(options =>
+    .AddJsonOptions(static options =>
     {
         options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
         options.JsonSerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
@@ -161,7 +161,7 @@ builder.Services.AddRateLimiter(_ =>
 });
 
 // Error handler
-builder.Services.AddProblemDetails(options =>
+builder.Services.AddProblemDetails(static options =>
 {
     options.CustomizeProblemDetails = context =>
     {
@@ -174,14 +174,14 @@ builder.Services.AddSignalR();
 
 // Compress
 builder.Services.AddRequestDecompression();
-builder.Services.AddResponseCompression(options =>
+builder.Services.AddResponseCompression(static options =>
 {
     // Default false (for CRIME and BREACH attacks)
     options.EnableForHttps = true;
     options.Providers.Add<GzipCompressionProvider>();
     options.MimeTypes = new[] { MediaTypeNames.Application.Json };
 });
-builder.Services.Configure<GzipCompressionProviderOptions>(options =>
+builder.Services.Configure<GzipCompressionProviderOptions>(static options =>
 {
     options.Level = CompressionLevel.Fastest;
 });
@@ -195,7 +195,7 @@ builder.Services
 if (!builder.Environment.IsProduction())
 {
     // Profiler
-    builder.Services.AddMiniProfiler(options =>
+    builder.Services.AddMiniProfiler(static options =>
     {
         options.RouteBasePath = "/profiler";
     });
@@ -204,7 +204,7 @@ if (!builder.Environment.IsProduction())
 // Authentication
 builder.Services
     .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(options =>
+    .AddCookie(static options =>
     {
         options.Cookie.Name = "__account";
         options.ExpireTimeSpan = TimeSpan.FromMinutes(1440);
@@ -295,15 +295,15 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     // Serilog
-    app.UseSerilogRequestLogging(options =>
+    app.UseSerilogRequestLogging(static options =>
     {
         options.IncludeQueryInRequestPath = true;
     });
 
     // HTTP log
     app.UseWhen(
-        c => c.Request.Path.StartsWithSegments("/api", StringComparison.OrdinalIgnoreCase),
-        b => b.UseHttpLogging());
+        static c => c.Request.Path.StartsWithSegments("/api", StringComparison.OrdinalIgnoreCase),
+        static b => b.UseHttpLogging());
     //app.UseHttpLogging();
 }
 
@@ -313,13 +313,13 @@ app.UseForwardedHeaders();
 // TODO check
 // Error handler
 app.UseWhen(
-    c => c.Request.Path.StartsWithSegments("/api", StringComparison.OrdinalIgnoreCase),
-    b => b.UseExceptionHandler());
+    static c => c.Request.Path.StartsWithSegments("/api", StringComparison.OrdinalIgnoreCase),
+    static b => b.UseExceptionHandler());
 if (app.Environment.IsProduction())
 {
     app.UseWhen(
-        c => !c.Request.Path.StartsWithSegments("/api", StringComparison.OrdinalIgnoreCase),
-        b =>
+        static c => !c.Request.Path.StartsWithSegments("/api", StringComparison.OrdinalIgnoreCase),
+        static b =>
         {
             b.UseStatusCodePagesWithReExecute("/error/{0}");
             b.UseStatusCodePagesWithReExecute("/error/{0}");
@@ -328,8 +328,8 @@ if (app.Environment.IsProduction())
 else
 {
     app.UseWhen(
-        c => !c.Request.Path.StartsWithSegments("/api", StringComparison.OrdinalIgnoreCase),
-        b =>
+        static c => !c.Request.Path.StartsWithSegments("/api", StringComparison.OrdinalIgnoreCase),
+        static b =>
         {
             b.UseDeveloperExceptionPage();
             b.UseStatusCodePagesWithReExecute("/error/{0}");
@@ -404,8 +404,8 @@ app.UseAuthorization();
 
 // Compress
 app.UseWhen(
-    c => c.Request.Path.StartsWithSegments("/api", StringComparison.OrdinalIgnoreCase),
-    b =>
+    static c => c.Request.Path.StartsWithSegments("/api", StringComparison.OrdinalIgnoreCase),
+    static b =>
     {
         b.UseResponseCompression();
         b.UseRequestDecompression();
