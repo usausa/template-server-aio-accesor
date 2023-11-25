@@ -1,5 +1,3 @@
-using System.IO.Compression;
-using System.Net.Mime;
 using System.Text.Encodings.Web;
 using System.Text.Json.Serialization;
 using System.Text.Unicode;
@@ -8,7 +6,6 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Hosting.WindowsServices;
 using Microsoft.Extensions.Options;
@@ -25,6 +22,7 @@ using Serilog;
 
 using Smart.AspNetCore;
 using Smart.AspNetCore.ApplicationModels;
+using Smart.AspNetCore.Filters;
 using Smart.Data;
 using Smart.Data.Accessor.Extensions.DependencyInjection;
 using Smart.Data.SqlClient;
@@ -122,7 +120,7 @@ builder.Services.Configure<ForwardedHeadersOptions>(static options =>
 //});
 
 // Filter
-//builder.Services.AddSingleton<ExceptionStatusFilter>(); // TODO status
+builder.Services.AddSingleton<ExceptionStatusFilter>();
 builder.Services.AddTimeLogging(options =>
 {
     options.Threshold = serverSetting.LongTimeThreshold;
@@ -134,7 +132,7 @@ builder.Services
     .AddControllersWithViews(static options =>
     {
         options.Conventions.Add(new LowercaseControllerModelConvention());
-        //options.Filters.AddExceptionStatus(); // TODO status
+        options.Filters.AddExceptionStatus();
         options.Filters.AddTimeLogging();
     })
 #if DEBUG
@@ -173,18 +171,18 @@ builder.Services.AddProblemDetails(static options =>
 builder.Services.AddSignalR();
 
 // Compress
-builder.Services.AddRequestDecompression();
-builder.Services.AddResponseCompression(static options =>
-{
-    // Default false (for CRIME and BREACH attacks)
-    options.EnableForHttps = true;
-    options.Providers.Add<GzipCompressionProvider>();
-    options.MimeTypes = new[] { MediaTypeNames.Application.Json };
-});
-builder.Services.Configure<GzipCompressionProviderOptions>(static options =>
-{
-    options.Level = CompressionLevel.Fastest;
-});
+//builder.Services.AddRequestDecompression();
+//builder.Services.AddResponseCompression(static options =>
+//{
+//    // Default false (for CRIME and BREACH attacks)
+//    options.EnableForHttps = true;
+//    options.Providers.Add<GzipCompressionProvider>();
+//    options.MimeTypes = new[] { MediaTypeNames.Application.Json };
+//});
+//builder.Services.Configure<GzipCompressionProviderOptions>(static options =>
+//{
+//    options.Level = CompressionLevel.Fastest;
+//});
 
 // Health
 builder.Services
@@ -358,17 +356,6 @@ app.UseStaticFiles(new StaticFileOptions
 // Coolie policy
 //app.UseCookiePolicy();
 
-// Develop
-if (!app.Environment.IsProduction())
-{
-    // Profiler
-    app.UseMiniProfiler();
-
-    // Swagger
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
 // Routing
 app.UseRouting();
 
@@ -403,13 +390,13 @@ app.UseAuthorization();
 //app.UseSession();
 
 // Compress
-app.UseWhen(
-    static c => c.Request.Path.StartsWithSegments("/api", StringComparison.OrdinalIgnoreCase),
-    static b =>
-    {
-        b.UseResponseCompression();
-        b.UseRequestDecompression();
-    });
+//app.UseWhen(
+//    static c => c.Request.Path.StartsWithSegments("/api", StringComparison.OrdinalIgnoreCase),
+//    static b =>
+//    {
+//        b.UseResponseCompression();
+//        b.UseRequestDecompression();
+//    });
 
 // Cache
 // app.UseResponseCaching();
@@ -423,7 +410,7 @@ app.MapControllers();
 app.MapMetrics();
 
 // Health
-app.UseHealthChecks("/health");
+app.MapHealthChecks("/health");
 
 // Run
 app.Run();

@@ -11,8 +11,5 @@ public class LogController : BaseExampleController
     }
 
     [HttpGet]
-    public IActionResult Exception()
-    {
-        throw new InvalidOperationException("Cause exception.");
-    }
+    public IActionResult Error() => throw new InvalidOperationException("Cause exception.");
 }

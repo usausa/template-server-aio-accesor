@@ -43,4 +43,5 @@ global using Template.Web.Authentication;
 global using Template.Web.Infrastructure.Filters;
 global using Template.Web.Infrastructure.Mvc;
 global using Template.Web.Infrastructure.Token;
+global using Template.Web.Application;
 global using Template.Web.Settings;
