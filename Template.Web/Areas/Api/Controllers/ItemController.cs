@@ -21,7 +21,7 @@ public class ItemController : BaseApiController
     {
         return Ok(new ItemListResponse
         {
-            Entries = [.. await ItemService.QueryItemListAsync(category)]
+            Entries = (await ItemService.QueryItemListAsync(category)).ToArray()
         });
     }
 
