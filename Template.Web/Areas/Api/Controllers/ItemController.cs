@@ -2,7 +2,6 @@ namespace Template.Web.Areas.Api.Controllers;
 
 using Template.Web.Areas.Api.Models;
 
-[System.Diagnostics.CodeAnalysis.SuppressMessage("Security", "CA5391", Justification = "API Controller")]
 public class ItemController : BaseApiController
 {
     private IMapper Mapper { get; }
@@ -22,7 +21,7 @@ public class ItemController : BaseApiController
     {
         return Ok(new ItemListResponse
         {
-            Entries = (await ItemService.QueryItemListAsync(category)).ToArray()
+            Entries = [.. await ItemService.QueryItemListAsync(category)]
         });
     }
 
