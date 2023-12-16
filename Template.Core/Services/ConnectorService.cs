@@ -2,7 +2,7 @@ namespace Template.Services;
 
 using Rester;
 
-public class ConnectorService
+public sealed class ConnectorService
 {
     private ILogger<ConnectorService> Log { get; }
 

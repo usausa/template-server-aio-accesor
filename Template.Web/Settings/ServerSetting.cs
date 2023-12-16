@@ -1,6 +1,6 @@
 namespace Template.Web.Settings;
 
-public class ServerSetting
+public sealed class ServerSetting
 {
     public string ApiToken { get; set; } = default!;
 

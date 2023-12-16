@@ -3,7 +3,7 @@ namespace Template.Web.Areas.Default.Controllers;
 using Template.Web.Areas.Default.Models;
 
 [AllowAnonymous]
-public class AccountController : BaseDefaultController
+public sealed class AccountController : BaseDefaultController
 {
     private AccountManager AccountManager { get; }
 

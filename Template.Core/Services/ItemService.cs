@@ -2,7 +2,7 @@ namespace Template.Services;
 
 using Template.Accessors;
 
-public class ItemService
+public sealed class ItemService
 {
     private IDbProvider DbProvider { get; }
 

@@ -1,5 +1,5 @@
 namespace Template.Web.Components;
 
-public class SelectListBuilder
+public sealed class SelectListBuilder
 {
 }

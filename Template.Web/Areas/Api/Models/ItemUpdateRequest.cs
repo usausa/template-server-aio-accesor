@@ -1,6 +1,6 @@
 namespace Template.Web.Areas.Api.Models;
 
-public class ItemUpdateRequestEntry
+public sealed class ItemUpdateRequestEntry
 {
     public string Code { get; set; } = default!;
 
@@ -8,7 +8,7 @@ public class ItemUpdateRequestEntry
 }
 
 #pragma warning disable CA1819
-public class ItemUpdateRequest
+public sealed class ItemUpdateRequest
 {
     [Required]
     public ItemUpdateRequestEntry[] Entries { get; set; } = default!;

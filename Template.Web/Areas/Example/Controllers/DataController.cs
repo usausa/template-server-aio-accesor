@@ -2,7 +2,7 @@ namespace Template.Web.Areas.Example.Controllers;
 
 using Template.Web.Areas.Example.Models;
 
-public class DataController : BaseExampleController
+public sealed class DataController : BaseExampleController
 {
     private const int PageSize = 15;
 

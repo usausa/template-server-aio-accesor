@@ -1,6 +1,6 @@
 namespace Template.Models.Entity;
 
-public class AccountEntity
+public sealed class AccountEntity
 {
     public string Id { get; set; } = default!;
 

@@ -1,6 +1,6 @@
 namespace Template.Models.View;
 
-public class ReportView : ItemEntity
+public sealed class ReportView : ItemEntity
 {
     public string CategoryName { get; set; } = default!;
 }

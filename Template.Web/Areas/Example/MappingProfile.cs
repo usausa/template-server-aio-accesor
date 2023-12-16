@@ -2,7 +2,7 @@ namespace Template.Web.Areas.Example;
 
 using Template.Web.Areas.Example.Models;
 
-public class MappingProfile : Profile
+public sealed class MappingProfile : Profile
 {
     public MappingProfile()
     {

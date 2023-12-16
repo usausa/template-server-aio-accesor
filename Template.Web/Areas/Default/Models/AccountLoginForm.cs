@@ -1,6 +1,6 @@
 namespace Template.Web.Areas.Default.Models;
 
-public class AccountLoginForm
+public sealed class AccountLoginForm
 {
     [Required(ErrorMessage = Messages.Required)]
     public string Id { get; set; } = default!;

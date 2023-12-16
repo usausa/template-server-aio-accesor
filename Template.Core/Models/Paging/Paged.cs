@@ -1,6 +1,6 @@
 namespace Template.Models.Paging;
 
-public class Paged<T> : IPaged, IPageOver, IEnumerable<T>
+public sealed class Paged<T> : IPaged, IPageOver, IEnumerable<T>
 {
     private readonly IList<T> items;
 

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 
 using Template.Components.Security;
 
-public class AccountManager
+public sealed class AccountManager
 {
     private IHttpContextAccessor HttpContextAccessor { get; }
 

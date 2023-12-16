@@ -2,7 +2,7 @@ namespace Template.Web.Areas.Api.Controllers;
 
 using Template.Web.Areas.Api.Models;
 
-public class ItemController : BaseApiController
+public sealed class ItemController : BaseApiController
 {
     private IMapper Mapper { get; }
 

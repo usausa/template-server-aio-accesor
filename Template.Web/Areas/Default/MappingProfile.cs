@@ -1,6 +1,6 @@
 namespace Template.Web.Areas.Default;
 
-public class MappingProfile : Profile
+public sealed class MappingProfile : Profile
 {
     // TODO
     //public MappingProfile()

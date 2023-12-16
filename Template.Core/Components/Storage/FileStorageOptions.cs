@@ -1,6 +1,6 @@
 namespace Template.Components.Storage;
 
-public class FileStorageOptions
+public sealed class FileStorageOptions
 {
     public string Root { get; set; } = default!;
 }

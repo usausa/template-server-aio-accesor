@@ -2,7 +2,7 @@ namespace Template.Services;
 
 using Template.Accessors;
 
-public class AccountService
+public sealed class AccountService
 {
     private IAccountAccessor AccountAccessor { get; }
 

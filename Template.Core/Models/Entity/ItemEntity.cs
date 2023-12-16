@@ -1,6 +1,6 @@
 namespace Template.Models.Entity;
 
-public class ItemEntity
+public abstract class ItemEntity
 {
     public string Code { get; set; } = default!;
 

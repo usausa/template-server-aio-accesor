@@ -1,7 +1,7 @@
 namespace Template.Integration;
 
 // TODO ref https://docs.microsoft.com/ja-jp/aspnet/core/test/integration-tests
-public class DashboardUsecaseTest
+public sealed class DashboardUsecaseTest
 {
     private sealed class CustomWebApplicationFactory : WebApplicationFactory<Program>
     {

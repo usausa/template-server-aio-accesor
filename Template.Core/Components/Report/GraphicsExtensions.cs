@@ -100,7 +100,8 @@ public static class GraphicsExtensions
         g.DrawImage(GenerateXImage(writer.Write(text)), x, y);
     }
 
-    [SuppressMessage("Interoperability", "CA1416:ValidatePlatformCompatibility", Justification = "Windows only")]
+    // TODO Bitmap
+#pragma warning disable CA1416
     private static XImage GenerateXImage(PixelData data)
     {
         using var bitmap = new Bitmap(data.Width, data.Height, PixelFormat.Format32bppRgb);
@@ -124,4 +125,5 @@ public static class GraphicsExtensions
         // ReSharper disable once AccessToDisposedClosure
         return XImage.FromStream(() => ms);
     }
+#pragma warning restore CA1416
 }

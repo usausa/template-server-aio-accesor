@@ -1,6 +1,6 @@
 namespace Template.Models.Paging;
 
-public class Pageable
+public abstract class Pageable
 {
     public int Page { get; set; }
 

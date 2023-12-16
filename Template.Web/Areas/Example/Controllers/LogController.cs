@@ -1,6 +1,6 @@
 namespace Template.Web.Areas.Example.Controllers;
 
-public class LogController : BaseExampleController
+public sealed class LogController : BaseExampleController
 {
     [HttpGet]
     public async ValueTask<IActionResult> Slow()

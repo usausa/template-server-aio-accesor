@@ -2,12 +2,11 @@ namespace Template.Web.Areas.Api.Controllers;
 
 using Template.Components.Storage;
 
-[SuppressMessage("Security", "CA5391", Justification = "API Controller")]
 [Area("api")]
 [Route("[area]/[controller]")]
 [ApiController]
 [ApiExplorerSettings(IgnoreApi = true)]
-public class StorageController : ControllerBase
+public sealed class StorageController : ControllerBase
 {
     private const string ContextType = "application/octet-stream";
 

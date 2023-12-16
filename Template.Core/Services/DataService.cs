@@ -2,7 +2,7 @@ namespace Template.Services;
 
 using Template.Accessors;
 
-public class DataSearchParameter : Pageable
+public sealed class DataSearchParameter : Pageable
 {
     public bool? Flag { get; set; }
 
@@ -13,7 +13,7 @@ public class DataSearchParameter : Pageable
     public DateTime? DateTimeTo { get; set; }
 }
 
-public class DataService
+public sealed class DataService
 {
     private IDataAccessor DataAccessor { get; }
 

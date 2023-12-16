@@ -1,6 +1,6 @@
 namespace Template.Web.Areas.Example.Controllers;
 
-public class ConnectorController : BaseExampleController
+public sealed class ConnectorController : BaseExampleController
 {
     private ConnectorService ConnectorService { get; }
 

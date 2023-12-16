@@ -1,6 +1,6 @@
 namespace Template.Web.Areas.Default.Controllers;
 
-public class DashboardController : BaseDefaultController
+public sealed class DashboardController : BaseDefaultController
 {
     [AllowAnonymous]
     [DefaultRoute]

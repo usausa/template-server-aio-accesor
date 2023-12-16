@@ -1,6 +1,6 @@
 namespace Template.Web.Areas.Example.Models;
 
-public class DataListForm
+public sealed class DataListForm
 {
     [Range(1, Int32.MaxValue)]
     public int? Page { get; set; }

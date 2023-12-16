@@ -2,7 +2,7 @@ namespace Template.Web.Areas.Api.Controllers;
 
 using Template.Web.Areas.Api.Models;
 
-public class TerminalController : BaseApiController
+public sealed class TerminalController : BaseApiController
 {
     [HttpGet]
     public IActionResult Time()
