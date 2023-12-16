@@ -10,7 +10,7 @@ using Template.Web.Areas.Default.Models;
 [ApiExplorerSettings(IgnoreApi = true)]
 public class ErrorController : Controller
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Security", "CA5395", Justification = "Ignore")]
+    [SuppressMessage("Security", "CA5395", Justification = "Ignore")]
     [Route("~/[controller]/{statusCode:int}")]
     public IActionResult Index(int statusCode)
     {

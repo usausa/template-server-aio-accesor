@@ -2,11 +2,10 @@ namespace Template.Web.Areas.Api.Controllers;
 
 using Template.Components.Storage;
 
-[System.Diagnostics.CodeAnalysis.SuppressMessage("Security", "CA5391", Justification = "API Controller")]
+[SuppressMessage("Security", "CA5391", Justification = "API Controller")]
 [Area("api")]
 [Route("[area]/[controller]")]
 [ApiController]
-[TokenFilter]
 [ApiExplorerSettings(IgnoreApi = true)]
 public class StorageController : ControllerBase
 {

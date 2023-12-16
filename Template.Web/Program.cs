@@ -34,6 +34,7 @@ using Template.Components.Report;
 using Template.Components.Security;
 using Template.Components.Storage;
 using Template.Web.Application.HealthChecks;
+using Template.Web.Application.RateLimiting;
 
 #pragma warning disable CA1812
 
@@ -50,6 +51,10 @@ var builder = WebApplication.CreateBuilder(new WebApplicationOptions
 builder.Host
     .UseWindowsService()
     .UseSystemd();
+
+// Configuration
+var serverSetting = builder.Configuration.GetSection("Server").Get<ServerSetting>()!;
+builder.Services.AddSingleton(serverSetting);
 
 // Log
 builder.Logging.ClearProviders();
@@ -81,10 +86,6 @@ GlobalFontSettings.FontResolver = new FontResolver(Directory.GetCurrentDirectory
 // Add framework Services.
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSingleton(HtmlEncoder.Create(UnicodeRanges.All));
-
-// Settings
-var serverSetting = builder.Configuration.GetSection("Server").Get<ServerSetting>()!;
-builder.Services.AddSingleton(serverSetting);
 
 // Feature management
 builder.Services.AddFeatureManagement();
@@ -125,7 +126,6 @@ builder.Services.AddTimeLogging(options =>
 {
     options.Threshold = serverSetting.LongTimeThreshold;
 });
-builder.Services.AddSingleton(new TokenSetting { Token = serverSetting.ApiToken });
 
 // Mvc
 builder.Services
@@ -154,9 +154,7 @@ if (!builder.Environment.IsProduction())
 }
 
 // Rate limit
-builder.Services.AddRateLimiter(_ =>
-{
-});
+builder.Services.AddRateLimiter(builder.Configuration.GetSection("RateLimit").Get<RateLimitSetting>()!);
 
 // Error handler
 builder.Services.AddProblemDetails(static options =>
@@ -360,7 +358,9 @@ app.UseStaticFiles(new StaticFileOptions
 app.UseRouting();
 
 // Rate limit
-//app.UseRateLimiter();
+app.UseWhen(
+    static c => c.Request.Path.StartsWithSegments("/api", StringComparison.OrdinalIgnoreCase),
+    static b => b.UseRateLimiter());
 
 // Localize
 //app.UseRequestLocalization();
@@ -412,11 +412,13 @@ app.MapMetrics();
 // Health
 app.MapHealthChecks("/health");
 
+// Initialize
+await app.InitializeAsync();
+
 // Run
-app.Run();
+await app.RunAsync();
 
 // For test
-#pragma warning disable CA1050
 public partial class Program
 {
 }

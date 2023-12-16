@@ -100,7 +100,7 @@ public static class GraphicsExtensions
         g.DrawImage(GenerateXImage(writer.Write(text)), x, y);
     }
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Interoperability", "CA1416:ValidatePlatformCompatibility", Justification = "Windows only")]
+    [SuppressMessage("Interoperability", "CA1416:ValidatePlatformCompatibility", Justification = "Windows only")]
     private static XImage GenerateXImage(PixelData data)
     {
         using var bitmap = new Bitmap(data.Width, data.Height, PixelFormat.Format32bppRgb);

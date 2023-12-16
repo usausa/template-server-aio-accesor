@@ -63,7 +63,7 @@ public sealed class FileStorage : IStorage
         return ValueTask.CompletedTask;
     }
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Reliability", "CA2000:Dispose objects before losing scope", Justification = "Factory")]
+    [SuppressMessage("Reliability", "CA2000:Dispose objects before losing scope", Justification = "Factory")]
     public ValueTask<Stream> ReadAsync(string path, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
