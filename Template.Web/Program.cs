@@ -419,6 +419,6 @@ await app.InitializeAsync();
 await app.RunAsync();
 
 // For test
-public partial class Program
+public sealed partial class Program
 {
 }
