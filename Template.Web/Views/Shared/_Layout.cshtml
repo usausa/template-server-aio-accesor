@@ -33,7 +33,7 @@
                         <li class="nav-item" active-if="@ViewContext.IsActionActive("Default", "", "")">
                             <a class="nav-link" href="#"><i class="fas fa-project-diagram"></i> ○○機能</a>
                         </li>
-                        <li class="nav-item dropdown" active-if="@ViewContext.IsControllerActive("Default", new[] { "" })">
+                        <li class="nav-item dropdown" active-if="@ViewContext.IsControllerActive("Default", [""])">
                             <a href="#" class="nav-link dropdown-toggle" toggle="dropdown" role="button" data-toggle="dropdown"><i class="fas fa-edit"></i> ○○機能</a>
                             <div class="dropdown-menu" role="menu">
                                 <a class="dropdown-item" active-if="@ViewContext.IsControllerActive("Default", "")" href="#"><i class="fas fa-chart-line"></i> ○○機能</a>
