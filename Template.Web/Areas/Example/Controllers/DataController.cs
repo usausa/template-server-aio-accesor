@@ -27,7 +27,7 @@ public sealed class DataController : BaseExampleController
     {
         if (ModelState.IsValid)
         {
-            var parameter = Mapper.Map<DataSearchParameter>(form).SetSize(PageSize);
+            var parameter = Mapper.Map<DataSearchParameter>(form)!.SetSize(PageSize);
             ViewBag.Paged = await DataService.QueryAccountPagedAsync(parameter);
         }
 

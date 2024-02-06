@@ -33,6 +33,7 @@ using StackExchange.Profiling.Data;
 using Template.Components.Report;
 using Template.Components.Security;
 using Template.Components.Storage;
+using Template.Web;
 using Template.Web.Application.HealthChecks;
 using Template.Web.Application.RateLimiting;
 
@@ -286,6 +287,13 @@ builder.Services.AddSingleton<ConnectorService>();
 //--------------------------------------------------------------------------------
 
 var app = builder.Build();
+
+// Startup information
+ThreadPool.GetMinThreads(out var workerThreads, out var completionPortThreads);
+app.Logger.InfoServiceStart();
+app.Logger.InfoServiceSettingsEnvironment(typeof(Program).Assembly.GetName().Version, Environment.Version, Environment.CurrentDirectory);
+app.Logger.InfoServiceSettingsGC(GCSettings.IsServerGC, GCSettings.LatencyMode, GCSettings.LargeObjectHeapCompactionMode);
+app.Logger.InfoServiceSettingsThreadPool(workerThreads, completionPortThreads);
 
 // Log
 if (app.Environment.IsDevelopment())

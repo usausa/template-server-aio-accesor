@@ -9,9 +9,9 @@
   <ItemGroup>
     <PackageReference Include="AspNetCoreComponents.Bootstrap" Version="0.3.0" />
     <PackageReference Include="AspNetCoreComponents.QrCode" Version="0.3.0" />
-    <PackageReference Include="AutoMapper" Version="12.0.1" />
-    <PackageReference Include="CsvHelper" Version="30.0.1" />
-    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.4" />
+    <PackageReference Include="AutoMapper" Version="13.0.0" />
+    <PackageReference Include="CsvHelper" Version="30.1.0" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.5" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Systemd" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="8.0.0" />
     <PackageReference Include="Microsoft.FeatureManagement" Version="3.1.1" />
@@ -19,7 +19,7 @@
     <PackageReference Include="MiniProfiler.AspNetCore.Mvc" Version="4.3.8" />
     <PackageReference Include="prometheus-net" Version="8.2.1" />
     <PackageReference Include="prometheus-net.AspNetCore" Version="8.2.1" />
-    <PackageReference Include="Serilog.AspNetCore" Version="8.0.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="8.0.1" />
     <PackageReference Include="Serilog.Enrichers.Environment" Version="2.3.0" />
     <PackageReference Include="Serilog.Enrichers.Thread" Version="3.1.0" />
     <PackageReference Include="Serilog.Sinks.SyslogMessages" Version="3.0.1" />
@@ -27,7 +27,7 @@
     <PackageReference Include="System.Linq.Async" Version="6.0.1" />
     <PackageReference Include="System.Text.Encoding.CodePages" Version="8.0.0" />
     <PackageReference Include="Usa.Smart.AspNetCore" Version="2.4.0" />
-    <PackageReference Include="Usa.Smart.Core" Version="2.3.0" />
+    <PackageReference Include="Usa.Smart.Core" Version="2.3.1" />
     <PackageReference Include="Usa.Smart.Data" Version="2.4.0" />
     <PackageReference Include="Usa.Smart.Data.Accessor.Extensions.DependencyInjection" Version="2.5.0" />
     <PackageReference Include="Usa.Smart.Data.SqlClient" Version="2.4.0" />
