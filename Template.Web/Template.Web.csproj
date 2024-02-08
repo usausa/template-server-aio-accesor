@@ -9,7 +9,7 @@
   <ItemGroup>
     <PackageReference Include="AspNetCoreComponents.Bootstrap" Version="0.3.0" />
     <PackageReference Include="AspNetCoreComponents.QrCode" Version="0.3.0" />
-    <PackageReference Include="AutoMapper" Version="13.0.0" />
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="CsvHelper" Version="30.1.0" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.5" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Systemd" Version="8.0.0" />
