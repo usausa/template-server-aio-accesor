@@ -22,7 +22,6 @@ using Serilog;
 
 using Smart.AspNetCore;
 using Smart.AspNetCore.ApplicationModels;
-using Smart.AspNetCore.Filters;
 using Smart.Data;
 using Smart.Data.Accessor.Extensions.DependencyInjection;
 using Smart.Data.SqlClient;
@@ -122,7 +121,6 @@ builder.Services.Configure<ForwardedHeadersOptions>(static options =>
 //});
 
 // Filter
-builder.Services.AddSingleton<ExceptionStatusFilter>();
 builder.Services.AddTimeLogging(options =>
 {
     options.Threshold = serverSetting.LongTimeThreshold;
@@ -133,7 +131,6 @@ builder.Services
     .AddControllersWithViews(static options =>
     {
         options.Conventions.Add(new LowercaseControllerModelConvention());
-        options.Filters.AddExceptionStatus();
         options.Filters.AddTimeLogging();
     })
 #if DEBUG

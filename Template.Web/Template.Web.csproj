@@ -10,7 +10,7 @@
     <PackageReference Include="AspNetCoreComponents.Bootstrap" Version="0.3.0" />
     <PackageReference Include="AspNetCoreComponents.QrCode" Version="0.3.0" />
     <PackageReference Include="AutoMapper" Version="13.0.1" />
-    <PackageReference Include="CsvHelper" Version="30.1.0" />
+    <PackageReference Include="CsvHelper" Version="31.0.0" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.5" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Systemd" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="8.0.0" />
@@ -26,8 +26,8 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     <PackageReference Include="System.Linq.Async" Version="6.0.1" />
     <PackageReference Include="System.Text.Encoding.CodePages" Version="8.0.0" />
-    <PackageReference Include="Usa.Smart.AspNetCore" Version="2.4.0" />
-    <PackageReference Include="Usa.Smart.Core" Version="2.3.1" />
+    <PackageReference Include="Usa.Smart.AspNetCore" Version="2.4.1" />
+    <PackageReference Include="Usa.Smart.Core" Version="2.3.3" />
     <PackageReference Include="Usa.Smart.Data" Version="2.4.0" />
     <PackageReference Include="Usa.Smart.Data.Accessor.Extensions.DependencyInjection" Version="2.5.0" />
     <PackageReference Include="Usa.Smart.Data.SqlClient" Version="2.4.0" />
