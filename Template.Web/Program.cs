@@ -311,30 +311,24 @@ if (app.Environment.IsDevelopment())
 // Forwarded headers
 app.UseForwardedHeaders();
 
-// TODO check
 // Error handler
-app.UseWhen(
-    static c => c.Request.Path.StartsWithSegments("/api", StringComparison.OrdinalIgnoreCase),
-    static b => b.UseExceptionHandler());
-if (app.Environment.IsProduction())
+if (!app.Environment.IsDevelopment())
 {
     app.UseWhen(
-        static c => !c.Request.Path.StartsWithSegments("/api", StringComparison.OrdinalIgnoreCase),
+        static c => c.Request.Path.StartsWithSegments("/api", StringComparison.OrdinalIgnoreCase),
+        static b => b.UseExceptionHandler(),
         static b =>
         {
-            b.UseStatusCodePagesWithReExecute("/error/{0}");
+            b.UseExceptionHandler("/Home/Error");
             b.UseStatusCodePagesWithReExecute("/error/{0}");
         });
 }
 else
 {
     app.UseWhen(
-        static c => !c.Request.Path.StartsWithSegments("/api", StringComparison.OrdinalIgnoreCase),
-        static b =>
-        {
-            b.UseDeveloperExceptionPage();
-            b.UseStatusCodePagesWithReExecute("/error/{0}");
-        });
+        static c => c.Request.Path.StartsWithSegments("/api", StringComparison.OrdinalIgnoreCase),
+        static b => b.UseExceptionHandler(),
+        static b => b.UseStatusCodePagesWithReExecute("/error/{0}"));
 }
 
 // HSTS
