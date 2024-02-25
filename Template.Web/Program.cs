@@ -331,6 +331,17 @@ else
         static b => b.UseStatusCodePagesWithReExecute("/error/{0}"));
 }
 
+// Develop
+if (!app.Environment.IsProduction())
+{
+    // Profiler
+    app.UseMiniProfiler();
+
+    // Swagger
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
 // HSTS
 if (!app.Environment.IsDevelopment())
 {
@@ -366,17 +377,6 @@ app.UseWhen(
 
 // CORS
 //app.UseCors();
-
-// Develop
-if (!app.Environment.IsProduction())
-{
-    // Profiler
-    app.UseMiniProfiler();
-
-    // Swagger
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
 
 // Metrics
 app.UseHttpMetrics();
