@@ -28,6 +28,7 @@ public sealed class Paged<T> : IPaged, IPageOver, IEnumerable<T>
 
     public bool IsOver => items.Count == 0 && Page > 1;
 
+    // ReSharper disable once NotDisposedResourceIsReturned
     public IEnumerator<T> GetEnumerator() => items.GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
