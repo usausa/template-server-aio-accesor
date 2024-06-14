@@ -183,7 +183,7 @@ builder.Services.AddSignalR();
 // Health
 builder.Services
     .AddHealthChecks()
-    .AddCheck<CustomHealthCheck>("custom_check", tags: new[] { "app" });
+    .AddCheck<CustomHealthCheck>("custom_check", tags: ["app"]);
 
 // Develop
 if (!builder.Environment.IsProduction())
