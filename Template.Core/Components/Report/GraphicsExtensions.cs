@@ -4,12 +4,13 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 
-using PdfSharpCore.Drawing;
+using PdfSharp.Drawing;
 
 using ZXing;
 using ZXing.QrCode;
 using ZXing.Rendering;
 
+#pragma warning disable IDE0032
 public static class GraphicsExtensions
 {
     [ThreadStatic]
@@ -100,7 +101,6 @@ public static class GraphicsExtensions
         g.DrawImage(GenerateXImage(writer.Write(text)), x, y);
     }
 
-    // TODO Bitmap
 #pragma warning disable CA1416
     private static XImage GenerateXImage(PixelData data)
     {
@@ -123,7 +123,8 @@ public static class GraphicsExtensions
         ms.Seek(0, SeekOrigin.Begin);
 
         // ReSharper disable once AccessToDisposedClosure
-        return XImage.FromStream(() => ms);
+        return XImage.FromStream(ms);
     }
 #pragma warning restore CA1416
 }
+#pragma warning restore IDE0032

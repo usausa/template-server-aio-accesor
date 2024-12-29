@@ -1,6 +1,6 @@
 namespace Template.Components.Report;
 
-using PdfSharpCore.Fonts;
+using PdfSharp.Fonts;
 
 public sealed class FontResolver : IFontResolver
 {
@@ -17,7 +17,7 @@ public sealed class FontResolver : IFontResolver
         DefaultFontName = defaultFontName;
     }
 
-    public FontResolverInfo ResolveTypeface(string familyName, bool isBold, bool isItalic)
+    public FontResolverInfo? ResolveTypeface(string familyName, bool bold, bool italic)
     {
         if (fontFiles.TryGetValue(familyName, out var fileName))
         {

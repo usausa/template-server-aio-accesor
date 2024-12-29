@@ -12,7 +12,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.FeatureManagement;
 using Microsoft.Net.Http.Headers;
 
-using PdfSharpCore.Fonts;
+using PdfSharp.Fonts;
 
 using Prometheus;
 
