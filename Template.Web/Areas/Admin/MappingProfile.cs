@@ -1,5 +1,6 @@
 namespace Template.Web.Areas.Admin;
 
+#pragma warning disable IDE0320
 public sealed class MappingProfile : Profile
 {
     // TODO
@@ -7,3 +8,4 @@ public sealed class MappingProfile : Profile
     //{
     //}
 }
+#pragma warning restore IDE0320

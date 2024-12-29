@@ -2,6 +2,7 @@ namespace Template.Web.Areas.Api;
 
 using Template.Web.Areas.Api.Models;
 
+#pragma warning disable IDE0320
 public sealed class MappingProfile : Profile
 {
     public MappingProfile()
@@ -9,3 +10,4 @@ public sealed class MappingProfile : Profile
         CreateMap<ItemUpdateRequestEntry, ItemEntity>();
     }
 }
+#pragma warning restore IDE0320

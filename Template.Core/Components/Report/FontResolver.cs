@@ -17,14 +17,9 @@ public sealed class FontResolver : IFontResolver
         DefaultFontName = defaultFontName;
     }
 
-    public FontResolverInfo? ResolveTypeface(string familyName, bool bold, bool italic)
+    public FontResolverInfo ResolveTypeface(string familyName, bool bold, bool italic)
     {
-        if (fontFiles.TryGetValue(familyName, out var fileName))
-        {
-            return new FontResolverInfo(fileName);
-        }
-
-        return null!;
+        return fontFiles.TryGetValue(familyName, out var fileName) ? new FontResolverInfo(fileName) : null!;
     }
 
     public byte[] GetFont(string faceName) => File.ReadAllBytes(Path.Combine(path, faceName));
