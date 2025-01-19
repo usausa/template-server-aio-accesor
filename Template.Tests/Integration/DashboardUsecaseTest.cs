@@ -24,7 +24,7 @@ public sealed class DashboardUsecaseTest
         var client = application.CreateClient();
 
         // Act
-        var response = await client.GetAsync("/");
+        var response = await client.GetAsync("/", TestContext.Current.CancellationToken);
 
         // Assert
         response.EnsureSuccessStatusCode();
