@@ -4,6 +4,7 @@
     <File Path=".gitattributes" />
     <File Path=".gitignore" />
     <File Path="Analyzers.ruleset" />
+    <File Path="CodeCoverage.runsettings" />
     <File Path="Database.Sample.sql" />
     <File Path="Database.sql" />
     <File Path="Directory.Build.props" />
@@ -14,7 +15,6 @@
     <File Path="publish-win10-x64-single.bat" />
     <File Path="README.md" />
     <File Path="Template.Web.sln.DotSettings" />
-    <File Path="test.runsettings" />
   </Folder>
   <Folder Name="/Application/">
     <Project Path="Template.Core/Template.Core.csproj" />
